@@ -4,14 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <title>Emmy - Portfolio</title>
-    <!-- ปรับ theme-color ให้ตรงกับสีชมพูใหม่ -->
     <meta name="theme-color" content="#FFB3D0">
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s32">
-    <!-- สำหรับ iOS Home Screen Icon -->
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s180">
-    <!-- สำหรับ Android และ Chrome -->
     <link rel="icon" sizes="192x192" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s192">
-    <!-- กำหนดชื่อแอปที่จะขึ้นใต้ไอคอนบนหน้าจอ Home Screen -->
     <meta name="apple-mobile-web-app-title" content="Emmy">
     
     <!-- Fonts & Icons -->
@@ -20,7 +16,7 @@
     
     <style>
         :root {
-            /* อัปเดตสีจากรูป image_b00b05.jpg */
+            var(--primary-pink): #FFB3D0;
             --primary-pink: #FFB3D0;
             --soft-pink: #FFE6F0;
             --bg-color: #FFFDF9;
@@ -40,16 +36,16 @@
             background-color: var(--bg-color);
             color: var(--text-dark);
             
-            /* สร้างลายครอสติส (รูปหัวใจ ดอกไม้) ฝังในพื้นหลังตามรูป image_b01328.jpg และไล่สีแบบ image_b00b05.jpg */
+            /* พื้นหลังลายครอสติส + ไล่สีโทนชมพู-มิ้นต์ */
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round'%3E%3C!-- Pink Heart --%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23D9F9DC' stroke-width='1.5' stroke-linecap='round'%3E%3C!-- Mint Flower --%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3Cpath d='M40,100 l4,4 m0,-4 l-4,4 M46,106 l4,4 m0,-4 l-4,4 M34,106 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%238e8e93' stroke-width='1.2' stroke-linecap='round' opacity='0.3'%3E%3C!-- Scattered Crosses --%3E%3Cpath d='M80,30 l3,3 m0,-3 l-3,3 M130,50 l3,3 m0,-3 l-3,3 M20,120 l3,3 m0,-3 l-3,3 M70,130 l3,3 m0,-3 l-3,3' /%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23D9F9DC' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3Cpath d='M40,100 l4,4 m0,-4 l-4,4 M46,106 l4,4 m0,-4 l-4,4 M34,106 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%238e8e93' stroke-width='1.2' stroke-linecap='round' opacity='0.3'%3E%3Cpath d='M80,30 l3,3 m0,-3 l-3,3 M130,50 l3,3 m0,-3 l-3,3 M20,120 l3,3 m0,-3 l-3,3 M70,130 l3,3 m0,-3 l-3,3' /%3E%3C/g%3E%3C/svg%3E"),
                 linear-gradient(135deg, rgba(255, 179, 208, 0.25) 0%, rgba(255, 253, 249, 1) 40%, rgba(217, 249, 220, 0.4) 100%);
             
             min-height: 100vh;
             padding-bottom: 50px;
         }
 
-        /* 1. Header & Navbar */
+        /* Navbar */
         .navbar {
             position: sticky;
             top: 0;
@@ -71,7 +67,7 @@
             letter-spacing: 1px;
         }
 
-        /* 2. Profile Section (ประวัติส่วนตัว) */
+        /* Profile Section */
         .profile-container {
             max-width: 800px;
             margin: 40px auto 20px;
@@ -122,7 +118,7 @@
             box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
         }
 
-        /* 3. Portfolio Section (รวบรวมผลงาน) */
+        /* Section Titles */
         .section-title {
             max-width: 800px;
             margin: 40px auto 20px;
@@ -135,6 +131,48 @@
             gap: 10px;
         }
 
+        /* ----- โซนข้อมูลส่วนตัว (Personal Info Grid) ----- */
+        .info-grid {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+        }
+
+        .info-card h3 {
+            color: var(--primary-pink);
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .info-card ul li strong {
+            color: var(--text-light);
+            font-weight: 500;
+            width: 90px;
+            display: inline-block;
+        }
+
+        /* ----- โซนผลงาน (Portfolio & Cover Grid) ----- */
         .portfolio-grid {
             max-width: 800px;
             margin: 0 auto;
@@ -156,6 +194,7 @@
             color: inherit;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .work-card:hover {
@@ -163,12 +202,23 @@
             box-shadow: 0 12px 25px rgba(255, 179, 208, 0.2);
         }
 
-        /* ขนาดปก Thumbnail YouTube (16:9) */
         .work-thumbnail {
             width: 100%;
             aspect-ratio: 16 / 9;
             object-fit: cover;
             background: #f8f9fa;
+        }
+
+        /* ไอคอน Play สำหรับโซน Cover */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 4px 10px rgba(255, 179, 208, 0.5);
+            pointer-events: none;
         }
 
         .work-info {
@@ -209,7 +259,87 @@
             border: 1px solid var(--primary-pink);
         }
 
-        /* 4. Contact Section (ช่องทางการติดต่อ) */
+        /* Thumbnail Container สำหรับสไลด์ */
+        .work-thumbnail-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slider-wrapper .work-thumbnail {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 8px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary-pink);
+            width: 14px;
+            border-radius: 3px;
+        }
+
+        /* ----- โซน Gallery ----- */
+        .gallery-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(255, 179, 208, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 179, 208, 0.3);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Contact Section */
         .contact-container {
             max-width: 800px;
             margin: 40px auto;
@@ -242,63 +372,6 @@
             color: white;
             transform: translateY(-2px);
         }
-
-        .social-btn i {
-            font-size: 18px;
-        }
-      
-        /* Container ควบคุมสไลด์รูปภาพ 16:9 */
-        .work-thumbnail-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .slider-wrapper .work-thumbnail {
-            width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-            object-fit: cover;
-        }
-
-        /* จุดบอกตำแหน่งภาพด้านล่าง (Dots) */
-        .slider-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 6px;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 4px 8px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: var(--primary-pink);
-            width: 14px;
-            border-radius: 3px;
-        }      
     </style>
 </head>
 <body>
@@ -309,147 +382,213 @@
         <div style="color: var(--primary-pink);"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <!-- ประวัติส่วนตัว -->
+    <!-- ประวัติส่วนตัว (Profile) -->
     <div class="profile-container">
         <div class="profile-img-wrapper">
             <img src="https://lh3.googleusercontent.com/d/1g7ng_xBDlocsv65HiaPVcJ41CesWqJFG=s1000" alt="Profile Picture" class="profile-img">
         </div>
         <h1 class="profile-name">Chatchapong Singkhiporn</h1>
-        <p class="profile-role"><i class="fas fa-star" style="color: #ffd700; margin-right: 5px;"></i> Emmy Chatchapong Singkhiporn | Web Developer & Virtual Idol Cover Producer</p>
+        <p class="profile-role"><i class="fas fa-star" style="color: #ffd700; margin-right: 5px;"></i>Web Developer & Virtual Idol Cover Producer</p>
         
         <div class="profile-bio">
             <p><i class="fas fa-graduation-cap" style="color: var(--primary-pink); margin-right: 5px;"></i> Bachelor of Business Administration program in Digital Business Innovation, Maejo University</p>
-            <p style="margin-top: 10px; color: var(--text-light);">    กระผมนายชัชพงศ์ สิงคิพร (เอ็มมี่) กำลังศึกษาอยู่ชั้นปีที่ 3 มหาวิทยาลัยแม่โจ้ คณะบริหารธุรกิจ
+            <p style="margin-top: 10px; color: var(--text-light);">กระผมนายชัชพงศ์ สิงคิพร (เอ็มมี่) กำลังศึกษาอยู่ชั้นปีที่ 3 มหาวิทยาลัยแม่โจ้ คณะบริหารธุรกิจ
 สาขานวัตกรรมธุรกิจดิจิทัล มีประสบการณ์การทำเว็บไซต์และเว็บแอปเพื่อแก้ไขปัญหาและเพิ่มประสิทธิภาพการทำงาน จากการทำงานและกิจกรรมทั้งภายในและภายนอกมหาวิทยาลัยมีความสนใจในการทำงานด้าน UX/UI Designer , Frontend Developer และ Web & Application Development</p>
         </div>
     </div>
 
-    <!-- รวบรวมผลงาน -->
+    <!-- โซนข้อมูลส่วนตัว (Personal Info) - เพิ่มใหม่ -->
     <div class="section-title">
-        <i class="fas fa-folder-open"></i> My Works
+        <i class="fas fa-user-circle"></i> Personal Info
     </div>
-    
-<div class="portfolio-grid">
-    <!-- ผลงานที่ 1 -->
-    <a href="https://blm48-membership.vercel.app/" class="work-card" target="_blank">
-        
-        <!-- ส่วนหัวใจหลักของสไลด์ภาพหลายรูป -->
-        <div class="work-thumbnail-container">
-            <div class="slider-wrapper">
-                <!-- รูปที่ 1 -->
-                <img src="https://lh3.googleusercontent.com/d/1gv_GDnIcPCYS-9uZx2wcn1Q6HziV-j6M=s1000" alt="BLM48 Slide 1" class="work-thumbnail">
-                <!-- รูปที่ 2 -->
-                <img src="https://lh3.googleusercontent.com/d/1sLx22IhNcuC1YQU512D8TVEcf16GgZWg=s1000" alt="BLM48 Slide 2" class="work-thumbnail">
-                <!-- รูปที่ 3 -->
-                <img src="https://lh3.googleusercontent.com/d/1dpMB9D9OJOJynUe1eGtAK1TGdqc6TtYY=s1000" alt="BLM48 Slide 3" class="work-thumbnail">
-            </div>
-            
-            <!-- จุดไข่ปลาบอกตำแหน่งรูปภาพ -->
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+    <div class="info-grid">
+        <!-- กล่องข้อมูลพื้นฐาน -->
+        <div class="info-card">
+            <h3><i class="fas fa-address-card"></i> About Me</h3>
+            <ul>
+                <li><strong>Nickname:</strong> Emmy (เอ็มมี่)</li>
+                <li><strong>Age:</strong> 21 Years old</li>
+                <li><strong>Birthday:</strong> 06 / 05 / 2005</li>
+                <li><strong>Location:</strong> Chiang Mai, Thailand</li>
+            </ul>
         </div>
+        <!-- กล่องสิ่งที่ชอบและทักษะ -->
+        <div class="info-card">
+            <h3><i class="fas fa-heart"></i> Hobbies & Skills</h3>
+            <ul>
+                <li><strong>Hobbies:</strong> ฟังเพลง, ทำ/ปรับปรุงเว็บไซต์</li>
+                <li><strong>Design:</strong> Figma, Canva, UX/UI</li>
+                <li><strong>Dev:</strong> HTML, CSS, FlutterFlow</li>
+                <li><strong>Audio/Video:</strong> Mix Audio, Video Editing</li>
+            </ul>
+        </div>
+    </div>
 
-        <div class="work-info">
-            <h3 class="work-title">BLM48 Official Web App</h3>
-            <p class="work-desc">BLM48 เว็บแอพพลิเคชั่นที่รวบรวมข่าวสารของ Virtual Idol Cover Group อย่าง BLM48 เอาไว้ในเว็บแอปพลิเคชั้นที่เดียวกัน</p>
-            <div class="work-tags">
-                <span class="tag">Web App</span>
-                <span class="tag">HTML/CSS</span>
-                <span class="tag">Gemini AI</span>
-                <span class="tag">Google Sheet & Google Firebase</span>              
+    <!-- รวบรวมผลงาน Web / App -->
+    <div class="section-title">
+        <i class="fas fa-laptop-code"></i> Dev Projects
+    </div>
+    <div class="portfolio-grid">
+        <!-- ผลงานที่ 1 -->
+        <a href="https://blm48-membership.vercel.app/" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1gv_GDnIcPCYS-9uZx2wcn1Q6HziV-j6M=s1000" class="work-thumbnail">
+                    <img src="https://lh3.googleusercontent.com/d/1sLx22IhNcuC1YQU512D8TVEcf16GgZWg=s1000" class="work-thumbnail">
+                    <img src="https://lh3.googleusercontent.com/d/1dpMB9D9OJOJynUe1eGtAK1TGdqc6TtYY=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                </div>
             </div>
-        </div>
-    </a>
-  
-    <!-- ผลงานที่ 2 -->
-    <a href="https://sites.google.com/view/blm48/home" class="work-card" target="_blank">
-        
-        <!-- ส่วนหัวใจหลักของสไลด์ภาพหลายรูป -->
-        <div class="work-thumbnail-container">
-            <div class="slider-wrapper">
-                <!-- รูปที่ 1 -->
-                <img src="https://lh3.googleusercontent.com/d/1SSB26ax24VIjmJ7NoJF2vxCDdVv-NYhi=s1000" alt="BLM48 Website Slide 1" class="work-thumbnail">
+            <div class="work-info">
+                <h3 class="work-title">BLM48 Official Web App</h3>
+                <p class="work-desc">เว็บแอพพลิเคชั่นที่รวบรวมข่าวสารของ Virtual Idol Cover Group อย่าง BLM48</p>
+                <div class="work-tags">
+                    <span class="tag">Web App</span><span class="tag">HTML/CSS</span>
+                </div>
             </div>
-            
-            <!-- จุดไข่ปลาบอกตำแหน่งรูปภาพ -->
-            <div class="slider-dots">
-                <span class="dot active"></span>
+        </a>
+        <!-- ผลงานที่ 2 -->
+        <a href="https://sites.google.com/view/blm48/home" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1SSB26ax24VIjmJ7NoJF2vxCDdVv-NYhi=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
             </div>
-        </div>
+            <div class="work-info">
+                <h3 class="work-title">BLM48 Official Website</h3>
+                <p class="work-desc">เว็บไซต์อย่างเป็นทางการของ BLM48 | Virtual Idol Cover</p>
+                <div class="work-tags">
+                    <span class="tag">Google Site</span><span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+        </a>
+        <!-- ผลงานที่ 3 -->
+        <a href="https://youtu.be/B-Ghh9YuHi0" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1jsfuFC6KbbASyuUwocNxTxkIOfUcK-Yl=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">Dormitory</h3>
+                <p class="work-desc">แอปแจ้งซ่อมและดูแลหอพัก</p>
+                <div class="work-tags">
+                    <span class="tag">FlutterFlow</span><span class="tag">Supabase</span>        
+                </div>
+            </div>
+        </a>
+        <!-- ผลงานที่ 4 -->
+        <a href="#" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1teBDpE9vtTlH5rK0sIaFK2x0RsTox9d8=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">DAIDI - ได้ดิ</h3>
+                <p class="work-desc">แอปรวมร้านค้าสินค้า Digital Product</p>
+                <div class="work-tags">
+                    <span class="tag">Figma</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+    </div>
 
-        <div class="work-info">
-            <h3 class="work-title">BLM48 Official Website</h3>
-            <p class="work-desc">เว็บไซต์อย่างเป็นทางการของ BLM48 | Virtual Idol Cover inspired by the AKB48 Group</p>
-            <div class="work-tags">
-                <span class="tag">Google Site</span>
-                <span class="tag">HTML/CSS</span>
-                <span class="tag">Gemini AI</span>
+    <!-- โซนผลงานร้อง Cover (Cover Works) - เพิ่มใหม่ -->
+    <div class="section-title">
+        <i class="fas fa-microphone-alt"></i> Cover Works
+    </div>
+    <div class="portfolio-grid">
+        <!-- Cover ที่ 1 -->
+        <a href="https://youtu.be/QaxSjLIxcSE?si=xdkwxlXZ2Gs-kjsC" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/1u3AsotP4J9MYqzuCPS1gAf94BhSNOqmp=s1000" alt="Cover 1" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
             </div>
-        </div>
-    </a>
-  
-    <!-- ผลงานที่ 3 -->
-    <a href="https://youtu.be/B-Ghh9YuHi0" class="work-card" target="_blank">
+            <div class="work-info">
+                <h3 class="work-title">Bingo! ( Thai ver. )</h3>
+                <p class="work-desc">ORIGINAL SONG AKB48</p>
+                <p class="work-desc">Associated Performer: AKB48</p>
+                <p class="work-desc">Lyricist, Producer: Yasushi Akimoto</p>
+                <div class="work-tags">
+                    <span class="tag">Vocal Cover</span>
+                </div>
+            </div>
+        </a>
         
-        <!-- ส่วนหัวใจหลักของสไลด์ภาพหลายรูป -->
-        <div class="work-thumbnail-container">
-            <div class="slider-wrapper">
-                <!-- รูปที่ 1 -->
-                <img src="https://lh3.googleusercontent.com/d/1jsfuFC6KbbASyuUwocNxTxkIOfUcK-Yl=s1000" alt="Dormitory Slide 1" class="work-thumbnail">
+        <!-- Cover ที่ 2 -->
+        <a href="https://youtu.be/GWhGEdoQJb0?si=G7RDwCAUhbIkC24Y" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/1bdUsKSyX_Y2WZn7epFf1NxAhfTXi8XKm=s1000" alt="Cover 2" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
             </div>
-            
-            <!-- จุดไข่ปลาบอกตำแหน่งรูปภาพ -->
-            <div class="slider-dots">
-                <span class="dot active"></span>
+            <div class="work-info">
+                <h3 class="work-title">Boku wa Inai - หากวันนี้ไม่มีฉัน</h3>
+                <p class="work-desc">ORIGINAL SONG NMB48</p>
+                <p class="work-desc">Lyrics: Yasushi Akimoto</p>
+                <p class="work-desc">Music: Aoba Hiroki&Kadono Toshikazu</p>
+                <div class="work-tags">
+                    <span class="tag">Vocal Cover</span>
+                </div>
             </div>
-        </div>
-
-        <div class="work-info">
-            <h3 class="work-title">Dormitory</h3>
-            <p class="work-desc">แอปแจ้งซ่อมและดูแลหอพัก เพื่อช่วยให้การแจ้งปัญหาการติดตามสถานะงานซ่อม  และการจัดการงานของผู้ดูแลหอพัก</p>
-            <div class="work-tags">
-                <span class="tag">FlutterFlow</span>
-                <span class="tag">Supabase</span>        
+        </a>
+        <!-- Cover ที่ 3 -->
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU=s1000" alt="Cover 1" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
             </div>
-        </div>
-    </a>
-  
-    <!-- ผลงานที่ 4 -->
-    <a href="https://www.figma.com/design/pKN4g4OQTebmRHHPv2a5G1/%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%94%E0%B8%B4-DAIDI-?node-id=402-720&t=Cox8hR5x0Wm0mcsN-1" class="work-card" target="_blank">
+            <div class="work-info">
+                <h3 class="work-title">รักเทอที่สุดในจักรยาน (You-niverse)</h3>
+                <p class="work-desc">Artist : STANG Tarisa Preechatangkit</p>
+                <p class="work-desc">Project : INDYCAMP 2023</p>
+                <div class="work-tags">
+                   <span class="tag">Vocal Cover</span>
+                  <span class="tag">Mix Audio</span>
+                </div>
+            </div>
+        </a>
         
-        <!-- ส่วนหัวใจหลักของสไลด์ภาพหลายรูป -->
-        <div class="work-thumbnail-container">
-            <div class="slider-wrapper">
-                <!-- รูปที่ 1 -->
-                <img src="https://lh3.googleusercontent.com/d/1teBDpE9vtTlH5rK0sIaFK2x0RsTox9d8=s1000" alt="Dormitory Slide 1" class="work-thumbnail">
+        <!-- Cover ที่ 4 -->
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p=s1000" alt="Cover 2" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
             </div>
-            
-            <!-- จุดไข่ปลาบอกตำแหน่งรูปภาพ -->
-            <div class="slider-dots">
-                <span class="dot active"></span>
+            <div class="work-info">
+                <h3 class="work-title">เอาปากกามาวง</h3>
+                <p class="work-desc">Artist : Bell Warisara</p>
+                <p class="work-desc">Home Run Music</p>
+                <div class="work-tags">
+                    <span class="tag">Vocal Cover</span>
+                    <span class="tag">Mix Audio</span>
+                </div>
             </div>
-        </div>
+        </a>
+    </div>
 
-        <div class="work-info">
-            <h3 class="work-title">DAIDI - ได้ดิ</h3>
-            <p class="work-desc">แอปรวมร้านค้าสินค้า Digital Product ที่สามารถสั่งซื้อและดาวน์โหลดสินค้าได้</p>
-            <div class="work-tags">
-                <span class="tag">Figma</span>
-                <span class="tag">Canva</span>
-            </div>
-        </div>
-    </a>
-  
-</div>
+    <!-- โซน Gallery (แกลเลอรี) - เพิ่มใหม่ -->
+    <div class="section-title">
+        <i class="fas fa-images"></i> Gallery
+    </div>
+    <div class="gallery-grid">
+        <!-- เปลี่ยนลิงก์ src เป็นรูปภาพของคุณได้เลย -->
+        <img src="https://lh3.googleusercontent.com/d/1wxCQwGqjWc3fnCqFiRzEFoWa2KJcyZty=s1000" alt="Gallery 1" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1hxyoYziFaC4MtutaNrwAqKrHQxMj-NpX=s1000" alt="Gallery 2" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/12tap-Tst_Re7OhW4X7vIL7iTS6GGon9k=s1000" alt="Gallery 3" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1M0TCt2ytYHvA_faw9AJ9M9JxwsMA4lq3=s1000" alt="Gallery 4" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1ZIk4B7shly5Ga7-a-nZta2yBgq01J7Ry=s1000" alt="Gallery 5" class="gallery-img">
+    </div>
 
     <!-- ช่องทางการติดต่อ -->
     <div class="section-title">
         <i class="fas fa-paper-plane"></i> Contact Me
     </div>
-    
     <div class="contact-container">
         <a href="https://github.com/emmyblm48-create" class="social-btn">
             <i class="fab fa-github"></i> GitHub
@@ -458,45 +597,41 @@
             <i class="fab fa-instagram"></i> Instagram
         </a>
         <a href="https://www.instagram.com/emmy.blm48official/" class="social-btn" target="_blank">
-            <i class="fab fa-instagram"></i> Instagram Virtual Idol Cover
+            <i class="fab fa-instagram"></i> Virtual Idol IG
         </a>
-        <a href="mmchatchapong@gmail.com" class="social-btn">
-            <i class="fas fa-envelope"></i> mmchatchapong@gmail.com
+        <a href="mailto:mmchatchapong@gmail.com" class="social-btn">
+            <i class="fas fa-envelope"></i> Email
         </a>
     </div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // ดึงการ์ดสไลด์ทั้งหมดที่มีอยู่ในหน้าเว็บ
     const containers = document.querySelectorAll('.work-thumbnail-container');
 
     containers.forEach(container => {
         const wrapper = container.querySelector('.slider-wrapper');
+        if (!wrapper) return; // ข้ามถ้าไม่มี slider
+        
         const slides = container.querySelectorAll('.work-thumbnail');
         const dots = container.querySelectorAll('.dot');
         const totalSlides = slides.length;
         let currentIndex = 0;
 
-        // ฟังก์ชันสำหรับสั่งเปลี่ยนรูปภาพ
-        function nextSlide() {
-            // บวกค่า Index ไปทีละ 1 ถ้าเกินจำนวนรูปที่มีให้วนกลับไปเริ่มที่ 0 ใหม่
-            currentIndex = (currentIndex + 1) % totalSlides;
-            
-            // สั่งขยับแถบสไลด์ตามตำแหน่ง % ของรูป
-            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // อัปเดตสถานะของจุดไข่ปลา (Dots) ให้ตรงกับรูปปัจจุบัน
-            dots.forEach((dot, idx) => {
-                if (idx === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
+        if (totalSlides > 1) {
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            setInterval(nextSlide, 3000); 
         }
-
-        // ตั้งเวลาทำงานอัตโนมัติ (3000 มิลลิวินาที = 3 วินาที)
-        // คุณสามารถปรับตัวเลข 3000 เป็นเวลาที่ต้องการได้เลยครับ
-        setInterval(nextSlide, 3000); 
     });
 });
 </script>

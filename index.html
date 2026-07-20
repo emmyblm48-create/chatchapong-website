@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
@@ -35,7 +35,6 @@
             font-family: 'Quicksand', 'Kanit', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-dark);
-            overscroll-behavior-y: none; /* ป้องกันการรีเฟรชปกติของเบราว์เซอร์ เพื่อใช้ Custom Pull-to-refresh */
             
             background-image: 
                 url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E@keyframes beat {0% {transform: scale(1);} 15% {transform: scale(1.15);} 30% {transform: scale(1);} 45% {transform: scale(1.15);} 100% {transform: scale(1);}} .heart {transform-origin: 32px 30px; animation: beat 1.5s infinite;}%3C/style%3E%3Cg class='heart' stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23D9F9DC' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3Cpath d='M40,100 l4,4 m0,-4 l-4,4 M46,106 l4,4 m0,-4 l-4,4 M34,106 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%238e8e93' stroke-width='1.2' stroke-linecap='round' opacity='0.3'%3E%3Cpath d='M80,30 l3,3 m0,-3 l-3,3 M130,50 l3,3 m0,-3 l-3,3 M20,120 l3,3 m0,-3 l-3,3 M70,130 l3,3 m0,-3 l-3,3' /%3E%3C/g%3E%3C/svg%3E"),
@@ -47,7 +46,8 @@
             animation: moveBackground 8s linear infinite;
 
             min-height: 100vh;
-            padding-bottom: 50px;
+            /* เผื่อพื้นที่ให้ Bottom Nav */
+            padding-bottom: 80px; 
         }
 
         @keyframes moveBackground {
@@ -91,31 +91,7 @@
             letter-spacing: 1px;
         }
 
-        /* =========================================
-           ระบบดึงเพื่อรีเฟรช (Pull-to-Refresh)
-           ========================================= */
-        #ptr-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: rgba(255, 253, 249, 0.95);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: var(--primary-pink);
-            font-weight: 600;
-            font-size: 14px;
-            z-index: 998; /* อยู่ใต้ Navbar */
-            transform: translateY(-100%);
-            box-shadow: 0 4px 10px rgba(255, 179, 208, 0.1);
-        }
-
-        /* Navbar */
+        /* Navbar ด้านบน */
         .navbar {
             position: sticky;
             top: 0;
@@ -126,7 +102,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000; /* ให้ Navbar อยู่บนสุดเสมอ */
+            z-index: 1000;
             box-shadow: 0 4px 15px rgba(255, 179, 208, 0.15);
         }
 
@@ -137,12 +113,55 @@
             letter-spacing: 1px;
         }
 
+        /* =========================================
+           Bottom Navigation Bar (สร้างใหม่)
+           ========================================= */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0 15px 0;
+            box-shadow: 0 -4px 15px rgba(255, 179, 208, 0.15);
+            z-index: 1000;
+            border-top: 1px solid var(--soft-pink);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 11px;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover, .nav-item:active {
+            color: var(--primary-pink);
+            transform: scale(1.1);
+        }
+
         /* Profile Section */
         .profile-container {
             max-width: 800px;
             margin: 40px auto 20px;
             padding: 0 20px;
             text-align: center;
+            /* เพิ่ม offset เผื่อเวลากดมาจาก Nav แล้วโดน Header บัง */
+            scroll-margin-top: 80px; 
         }
 
         .profile-img-wrapper {
@@ -255,7 +274,6 @@
             background: #f8f9fa;
         }
 
-        /* ไอคอน Play สำหรับโซน Cover */
         .play-overlay {
             position: absolute;
             top: 50%;
@@ -305,7 +323,6 @@
             border: 1px solid var(--primary-pink);
         }
 
-        /* Thumbnail Container สำหรับสไลด์ */
         .work-thumbnail-container {
             position: relative;
             width: 100%;
@@ -499,6 +516,7 @@
             margin: 40px auto 20px;
             max-width: 800px;
             padding: 0 20px;
+            scroll-margin-top: 80px; /* Offset สำหรับ Nav */
         }
 
         .cs-icon {
@@ -524,9 +542,7 @@
 </head>
 <body>
 
-    <!-- ============================================================== 
-         SVG Defs พื้นฐานสำหรับลวดลายครอสติส
-         ============================================================== -->
+    <!-- SVG Defs พื้นฐานสำหรับลวดลายครอสติส -->
     <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
         <defs>
             <path id="x-stitch" d="M-2.5,-2.5 L2.5,2.5 M-2.5,2.5 L2.5,-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -549,9 +565,7 @@
         </defs>
     </svg>
 
-    <!-- ============================================================== 
-         หน้าจอโหลด (Preloader)
-         ============================================================== -->
+    <!-- หน้าจอโหลด (Preloader) -->
     <div id="preloader">
         <svg width="50" height="50" viewBox="0 0 60 60" class="cs-icon pink preloader-heart">
             <use href="#cs-heart" transform="translate(5, 5)"></use>
@@ -564,17 +578,9 @@
         <div class="brand-logo">Emmy</div>
         <div style="color: var(--primary-pink);"><i class="fas fa-heart"></i></div>
     </nav>
-  
-    <!-- ============================================================== 
-    แถบดึงเพื่อรีเฟรช (Pull-to-Refresh Indicator)
-    ============================================================== -->
-    <div id="ptr-indicator">
-        <i class="fas fa-arrow-down" id="ptr-icon"></i>
-        <span id="ptr-text">ดึงลงเพื่อรีเฟรช</span>
-    </div>
 
     <!-- ประวัติส่วนตัว (Profile) -->
-    <div class="profile-container">
+    <div class="profile-container" id="profile">
         <div class="profile-img-wrapper">
             <img src="https://lh3.googleusercontent.com/d/1g7ng_xBDlocsv65HiaPVcJ41CesWqJFG=s1000" alt="Profile Picture" class="profile-img">
         </div>
@@ -592,7 +598,7 @@
     </div>
 
     <!-- โซนข้อมูลส่วนตัว (Personal Info) -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="info">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-user-circle"></i> Personal Info</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -643,7 +649,7 @@
     </div>
 
     <!-- รวบรวมผลงาน Web / App -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="dev">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-laptop-code"></i> Dev Projects</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -714,9 +720,47 @@
             </div>
         </a>
     </div>
+
+    <!-- โซนงาน Graphic Design ที่เพิ่มเข้ามาใหม่ -->
+    <div class="cs-heading" id="graphic">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-paint-brush"></i> Graphic Works</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="portfolio-grid">
+        <!-- ตัวอย่างผลงาน Graphic ที่ 1 (สามารถเปลี่ยนรูปภาพและลิงก์ได้เลยครับ) -->
+        <a href="#" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://via.placeholder.com/800x450/FFE6F0/FFB3D0?text=Graphic+Work+1" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">Poster Design</h3>
+                <p class="work-desc">ผลงานออกแบบโปสเตอร์โปรโมทกิจกรรม</p>
+                <div class="work-tags">
+                    <span class="tag">Photoshop</span><span class="tag">Illustrator</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- ตัวอย่างผลงาน Graphic ที่ 2 -->
+        <a href="#" class="work-card">
+            <div class="work-thumbnail-container">
+                 <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://via.placeholder.com/800x450/D9F9DC/444444?text=Graphic+Work+2" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">Social Media Content</h3>
+                <p class="work-desc">ออกแบบ Artwork สำหรับโพสต์บนสื่อ Social Media</p>
+                <div class="work-tags">
+                    <span class="tag">Canva</span><span class="tag">Figma</span>
+                </div>
+            </div>
+        </a>
+    </div>
   
     <!-- โซนทักษะ (My Skills) -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="skills">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-tools"></i> My Skills</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -777,7 +821,7 @@
     </div>
   
     <!-- โซนผลงานร้อง Cover (Cover Works) -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="cover">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-microphone-alt"></i> Cover Works</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -816,7 +860,7 @@
     </div>
 
     <!-- โซน Gallery (แกลเลอรี) -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="gallery">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-images"></i> Gallery</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -830,7 +874,7 @@
     </div>
 
     <!-- ช่องทางการติดต่อ -->
-    <div class="cs-heading">
+    <div class="cs-heading" id="contact">
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
         <span><i class="fas fa-paper-plane"></i> Contact Me</span>
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
@@ -853,6 +897,30 @@
         </a>
     </div>
 
+    <!-- Bottom Navigation Bar (ที่สร้างใหม่) -->
+    <nav class="bottom-nav">
+        <a href="#profile" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#dev" class="nav-item">
+            <i class="fas fa-laptop-code"></i>
+            <span>Dev</span>
+        </a>
+        <a href="#graphic" class="nav-item">
+            <i class="fas fa-paint-brush"></i>
+            <span>Graphic</span>
+        </a>
+        <a href="#skills" class="nav-item">
+            <i class="fas fa-tools"></i>
+            <span>Skills</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <i class="fas fa-paper-plane"></i>
+            <span>Contact</span>
+        </a>
+    </nav>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
@@ -860,7 +928,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
-        // ถ่วงเวลาสักนิดให้ได้เห็นหัวใจเต้น แล้วค่อยๆ เฟดออก
         setTimeout(() => {
             preloader.style.opacity = '0';
             setTimeout(() => {
@@ -899,78 +966,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ==========================================
-    // 3. ระบบดึงหน้าจอเพื่อรีเฟรช (Pull to Refresh)
-    // ==========================================
-    let startY = 0;
-    let currentY = 0;
-    let isPulling = false;
-    const ptrIndicator = document.getElementById('ptr-indicator');
-    const ptrText = document.getElementById('ptr-text');
-    const ptrIcon = document.getElementById('ptr-icon');
-
-    // จับจังหวะตอนเริ่มแตะหน้าจอ (บนมือถือ)
-    document.addEventListener('touchstart', (e) => {
-        if (window.scrollY === 0) {
-            startY = e.touches[0].clientY;
-            isPulling = true;
-            ptrIndicator.style.transition = 'none'; 
-        }
-    }, {passive: true});
-
-    // จับจังหวะตอนลากนิ้ว
-    document.addEventListener('touchmove', (e) => {
-        if (!isPulling) return;
-        currentY = e.touches[0].clientY;
-        const pullDistance = currentY - startY;
-
-        // ถ้าลากลงมาด้านล่าง และอยู่บนสุดของเว็บ
-        if (pullDistance > 0 && window.scrollY === 0) {
-            let translateY = pullDistance - 60; // เริ่มจาก -60px ให้ค่อยๆ เลื่อนลงมา
-            if (translateY > 15) translateY = 15; // จำกัดระยะไม่ให้ลงมาเยอะเกินไป
-            
-            ptrIndicator.style.transform = `translateY(${Math.min(15, translateY)}px)`;
-            
-            // ถ้าลากลงมาเกิน 80px ให้เปลี่ยนข้อความพร้อมปล่อย
-            if (pullDistance > 80) {
-                ptrText.innerText = "ปล่อยเพื่อรีเฟรช";
-                ptrIcon.className = "fas fa-arrow-up";
-            } else {
-                ptrText.innerText = "ดึงลงเพื่อรีเฟรช";
-                ptrIcon.className = "fas fa-arrow-down";
-            }
-        }
-    }, {passive: true});
-
-    // จับจังหวะตอนปล่อยนิ้ว
-    document.addEventListener('touchend', () => {
-        if (!isPulling) return;
-        isPulling = false;
-        
-        const pullDistance = currentY - startY;
-        ptrIndicator.style.transition = 'transform 0.3s ease';
-
-        // ถ้าลากลงมามากพอ ให้ทำการรีเฟรชหน้า
-        if (pullDistance > 80 && window.scrollY === 0) {
-            ptrText.innerText = "กำลังรีเฟรช...";
-            ptrIcon.className = "fas fa-spinner fa-spin";
-            ptrIndicator.style.transform = `translateY(0px)`;
-            
-            setTimeout(() => {
-                location.reload();
-            }, 600);
-        } else {
-            // ถ้าดึงลงมาไม่พอ ให้ซ่อนแถบกลับไปที่เดิม
-            ptrIndicator.style.transform = `translateY(-100%)`;
-            setTimeout(() => {
-                ptrText.innerText = "ดึงลงเพื่อรีเฟรช";
-                ptrIcon.className = "fas fa-arrow-down";
-            }, 300);
-        }
-        
-        currentY = 0;
-        startY = 0;
-    });
+    // ระบบ Pull-to-refresh ถูกนำออกไปแล้วตามที่ขอครับ :)
 });
 </script>
 </body>

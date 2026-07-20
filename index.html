@@ -538,6 +538,34 @@
             right: -15px;
             transform: rotate(15deg);
         }
+      
+      /* =========================================
+       การปรับแต่งสำหรับมือถือ (เลื่อนซ้าย-ขวาซ่อน Scrollbar)
+       ========================================= */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                display: flex;
+                overflow-x: auto;
+                /* ทำให้การเลื่อนหยุดแบบพอดีกับการ์ด */
+                scroll-snap-type: x mandatory; 
+                padding-bottom: 15px; /* เผื่อพื้นที่ให้เงาของการ์ดตอน hover */
+
+                /* ซ่อนแถบเลื่อน (Scrollbar) */
+                -ms-overflow-style: none;  /* สำหรับ Internet Explorer, Edge */
+                scrollbar-width: none;  /* สำหรับ Firefox */
+            }
+
+            .portfolio-grid::-webkit-scrollbar {
+                display: none; /* สำหรับ Chrome, Safari และ Opera */
+            }
+
+            .work-card {
+                /* บังคับความกว้างของการ์ดไม่ให้หดตัวตามจอ (กว้าง 280px) */
+                flex: 0 0 280px; 
+                /* ให้จังหวะเลื่อนมาหยุดที่ขอบซ้ายของการ์ดพอดี */
+                scroll-snap-align: start; 
+            }
+        }
     </style>
 </head>
 <body>

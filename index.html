@@ -446,6 +446,54 @@
             background: var(--primary-pink);
             color: white;
         }
+      
+      /* กล่องข้อความสไตล์ครอสติส */
+      .cs-card {
+          background: rgba(255, 255, 255, 0.95);
+          padding: 30px;
+          border-radius: 18px;
+          border: 2px dashed var(--soft-pink); /* ใช้เส้นปะให้ดูเหมือนรอยเย็บ */
+          box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+          max-width: 800px;
+          margin: 20px auto;
+          position: relative;
+      }
+
+      /* หัวข้อสไตล์ครอสติส (จัดให้อยู่ตรงกลางพร้อมไอคอน) */
+      .cs-heading {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          color: var(--primary-pink);
+          font-size: 22px;
+          font-weight: 700;
+          margin-bottom: 20px;
+      }
+
+      /* ตั้งค่าสีให้ SVG ทำงานร่วมกับ CSS Variables */
+      .cs-icon {
+          display: inline-block;
+      }
+      .cs-icon.pink { color: var(--primary-pink); }
+      .cs-icon.mint { color: #A0E8AF; /* ปรับมิ้นต์ให้เข้มขึ้นเล็กน้อยเพื่อให้เห็นรอยปักชัดเจน */ }
+      .cs-icon.blue { color: #A8D0E6; /* สีฟ้าอ่อนตามรูปอ้างอิง */ }
+      .cs-icon.grey { color: var(--text-light); }
+
+      /* เส้นคั่นตกแต่ง (Divider) */
+      .cs-divider {
+          text-align: center;
+          margin: 25px 0;
+          opacity: 0.8;
+      }
+
+      /* ตำแหน่งโบว์ประดับมุมกล่อง */
+      .cs-corner-bow {
+          position: absolute;
+          top: -15px;
+          right: -15px;
+          transform: rotate(15deg);
+      }
     </style>
 </head>
 <body>
@@ -572,46 +620,6 @@
             </div>
         </a>
     </div>
-
-    <!-- โซนผลงานร้อง Cover (Cover Works) - เพิ่มใหม่ -->
-    <!--<div class="section-title">
-        <i class="fas fa-microphone-alt"></i> Cover Works
-    </div>
-    <div class="portfolio-grid">
-        <!-- Cover ที่ 1 
-        <a href="https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164" class="work-card" target="_blank">
-            <div class="work-thumbnail-container">
-                <img src="https://lh3.googleusercontent.com/d/17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU=s1000" alt="Cover 1" class="work-thumbnail">
-                <i class="fas fa-play-circle play-overlay"></i>
-            </div>
-            <div class="work-info">
-                <h3 class="work-title">รักเทอที่สุดในจักรยาน (You-niverse)</h3>
-                <p class="work-desc">Artist : STANG Tarisa Preechatangkit</p>
-                <p class="work-desc">Project : INDYCAMP 2023</p>
-                <div class="work-tags">
-                   <span class="tag">Vocal Cover</span>
-                  <span class="tag">Mix Audio</span>
-                </div>
-            </div>
-        </a>-->
-        
-        <!-- Cover ที่ 2
-        <a href="https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933" class="work-card" target="_blank">
-            <div class="work-thumbnail-container">
-                <img src="https://lh3.googleusercontent.com/d/1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p=s1000" alt="Cover 2" class="work-thumbnail">
-                <i class="fas fa-play-circle play-overlay"></i>
-            </div>
-            <div class="work-info">
-                <h3 class="work-title">เอาปากกามาวง</h3>
-                <p class="work-desc">Artist : Bell Warisara</p>
-                <p class="work-desc">Home Run Music</p>
-                <div class="work-tags">
-                    <span class="tag">Vocal Cover</span>
-                    <span class="tag">Mix Audio</span>
-                </div>
-            </div>
-        </a>
-    </div>-->
   
     <!-- โซนทักษะ (My Skills) - แยกออกมาให้ดูโปรขึ้น -->
     <div class="section-title">
@@ -651,6 +659,46 @@
                 <span class="skill-tag">Vocal</span>
             </div>
         </div>
+    </div>
+  
+    <!-- โซนผลงานร้อง Cover (Cover Works) - เพิ่มใหม่ -->
+    <div class="section-title">
+        <i class="fas fa-microphone-alt"></i> Cover Works
+    </div>
+    <div class="portfolio-grid">
+        <!-- Cover ที่ 1 -->
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU=s1000" alt="Cover 1" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">รักเทอที่สุดในจักรยาน (You-niverse)</h3>
+                <p class="work-desc">Artist : STANG Tarisa Preechatangkit</p>
+                <p class="work-desc">Project : INDYCAMP 2023</p>
+                <div class="work-tags">
+                   <span class="tag">Vocal Cover</span>
+                  <span class="tag">Mix Audio</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Cover ที่ 2 -->
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p=s1000" alt="Cover 2" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">เอาปากกามาวง</h3>
+                <p class="work-desc">Artist : Bell Warisara</p>
+                <p class="work-desc">Home Run Music</p>
+                <div class="work-tags">
+                    <span class="tag">Vocal Cover</span>
+                    <span class="tag">Mix Audio</span>
+                </div>
+            </div>
+        </a>
     </div>
 
     <!-- โซน Gallery (แกลเลอรี) - เพิ่มใหม่ -->

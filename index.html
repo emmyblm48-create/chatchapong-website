@@ -55,13 +55,8 @@
 
         /* เพิ่ม Keyframes สำหรับการเลื่อนเฉียงขึ้นซ้ายแบบวนลูป (วางต่อจาก body ได้เลย) */
         @keyframes moveBackground {
-            0% {
-                background-position: 0px 0px, center center;
-            }
-            100% {
-                /* เลื่อนไป -150px ซึ่งพอดีกับขนาดกล่อง SVG (150px) ทำให้ลูปไร้รอยต่อ */
-                background-position: -150px -150px, center center;
-            }
+            0% { background-position: 0px 0px, center center; }
+            100% { background-position: -150px -150px, center center; }
         }
 
         /* Navbar */
@@ -124,30 +119,6 @@
             color: var(--text-light);
             font-weight: 500;
             margin-bottom: 15px;
-        }
-
-        .profile-bio {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px solid var(--soft-pink);
-            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
-        }
-
-        /* Section Titles */
-        .section-title {
-            max-width: 800px;
-            margin: 40px auto 20px;
-            padding: 0 20px;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--primary-pink);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         /* ----- โซนข้อมูลส่วนตัว (Personal Info Grid) ----- */
@@ -447,56 +418,95 @@
             color: white;
         }
       
-      /* กล่องข้อความสไตล์ครอสติส */
-      .cs-card {
-          background: rgba(255, 255, 255, 0.95);
-          padding: 30px;
-          border-radius: 18px;
-          border: 2px dashed var(--soft-pink); /* ใช้เส้นปะให้ดูเหมือนรอยเย็บ */
-          box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
-          max-width: 800px;
-          margin: 20px auto;
-          position: relative;
-      }
+        /* =========================================
+           Cross-Stitch Decoration Elements
+           ========================================= */
 
-      /* หัวข้อสไตล์ครอสติส (จัดให้อยู่ตรงกลางพร้อมไอคอน) */
-      .cs-heading {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 15px;
-          color: var(--primary-pink);
-          font-size: 22px;
-          font-weight: 700;
-          margin-bottom: 20px;
-      }
+        /* กล่องข้อความสไตล์ครอสติส */
+        .cs-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 18px;
+            border: 2px dashed var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+            max-width: 800px;
+            margin: 25px auto 20px;
+            position: relative;
+        }
 
-      /* ตั้งค่าสีให้ SVG ทำงานร่วมกับ CSS Variables */
-      .cs-icon {
-          display: inline-block;
-      }
-      .cs-icon.pink { color: var(--primary-pink); }
-      .cs-icon.mint { color: #A0E8AF; /* ปรับมิ้นต์ให้เข้มขึ้นเล็กน้อยเพื่อให้เห็นรอยปักชัดเจน */ }
-      .cs-icon.blue { color: #A8D0E6; /* สีฟ้าอ่อนตามรูปอ้างอิง */ }
-      .cs-icon.grey { color: var(--text-light); }
+        /* หัวข้อสไตล์ครอสติส (จัดให้อยู่ตรงกลางพร้อมไอคอน) */
+        .cs-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--primary-pink);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px auto 20px;
+            max-width: 800px;
+            padding: 0 20px;
+        }
 
-      /* เส้นคั่นตกแต่ง (Divider) */
-      .cs-divider {
-          text-align: center;
-          margin: 25px 0;
-          opacity: 0.8;
-      }
+        /* ตั้งค่าสีให้ SVG */
+        .cs-icon {
+            display: inline-block;
+        }
+        .cs-icon.pink { color: var(--primary-pink); }
+        .cs-icon.mint { color: #A0E8AF; }
+        .cs-icon.blue { color: #A8D0E6; }
 
-      /* ตำแหน่งโบว์ประดับมุมกล่อง */
-      .cs-corner-bow {
-          position: absolute;
-          top: -15px;
-          right: -15px;
-          transform: rotate(15deg);
-      }
+        /* เส้นคั่นตกแต่ง (Divider) */
+        .cs-divider {
+            text-align: center;
+            margin: 30px 0;
+            opacity: 0.9;
+        }
+
+        /* ตำแหน่งโบว์ประดับมุมกล่อง */
+        .cs-corner-bow {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            transform: rotate(15deg);
+        }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================== 
+         [สำคัญ] SVG Defs พื้นฐานสำหรับลวดลายครอสติส ซ่อนไว้เพื่อให้เรียกใช้ได้ง่าย 
+         ============================================================== -->
+    <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <!-- ลายปักกากบาทพื้นฐาน -->
+            <path id="x-stitch" d="M-2.5,-2.5 L2.5,2.5 M-2.5,2.5 L2.5,-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            
+            <!-- รูปหัวใจ -->
+            <g id="cs-heart">
+                <use href="#x-stitch" x="10" y="0" /> <use href="#x-stitch" x="30" y="0" />
+                <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" /> <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" /> <use href="#x-stitch" x="40" y="10" />
+                <use href="#x-stitch" x="0" y="20" /> <use href="#x-stitch" x="10" y="20" /> <use href="#x-stitch" x="20" y="20" /> <use href="#x-stitch" x="30" y="20" /> <use href="#x-stitch" x="40" y="20" />
+                <use href="#x-stitch" x="10" y="30" /> <use href="#x-stitch" x="20" y="30" /> <use href="#x-stitch" x="30" y="30" />
+                <use href="#x-stitch" x="20" y="40" />
+            </g>
+
+            <!-- รูปโบว์มุมกล่อง -->
+            <g id="cs-bow">
+                <!-- ปีกซ้าย -->
+                <use href="#x-stitch" x="0" y="0" /> <use href="#x-stitch" x="10" y="0" />
+                <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" />
+                <!-- ตรงกลาง -->
+                <use href="#x-stitch" x="15" y="15" />
+                <!-- ปีกขวา -->
+                <use href="#x-stitch" x="20" y="0" /> <use href="#x-stitch" x="30" y="0" />
+                <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" />
+                <!-- หาง -->
+                <use href="#x-stitch" x="5" y="20" /> <use href="#x-stitch" x="25" y="20" />
+                <use href="#x-stitch" x="0" y="30" /> <use href="#x-stitch" x="30" y="30" />
+            </g>
+        </defs>
+    </svg>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -512,16 +522,22 @@
         <h1 class="profile-name">Chatchapong Singkhiporn</h1>
         <p class="profile-role"><i class="fas fa-star" style="color: #ffd700; margin-right: 5px;"></i>Worry less, smile more</p>
         
-        <div class="profile-bio">
-            <p><i class="fas fa-graduation-cap" style="color: var(--primary-pink); margin-right: 5px;"></i> Bachelor of Business Administration program in Digital Business Innovation, Maejo University</p>
-            <p style="margin-top: 10px; color: var(--text-light);">กระผมนายชัชพงศ์ สิงคิพร (เอ็มมี่) กำลังศึกษาอยู่ชั้นปีที่ 3 มหาวิทยาลัยแม่โจ้ คณะบริหารธุรกิจ
-สาขานวัตกรรมธุรกิจดิจิทัล มีประสบการณ์การทำเว็บไซต์และเว็บแอปเพื่อแก้ไขปัญหาและเพิ่มประสิทธิภาพการทำงาน จากการทำงานและกิจกรรมทั้งภายในและภายนอกมหาวิทยาลัยมีความสนใจในการทำงานด้าน UX/UI Designer , Frontend Developer และ Web & Application Development</p>
+        <!-- กล่องแนะนำตัวที่ปรับเป็นสไตล์ครอสติส -->
+        <div class="cs-card" style="text-align: left;">
+            <svg width="50" height="50" viewBox="0 0 50 50" class="cs-icon blue cs-corner-bow">
+                <use href="#cs-bow" transform="translate(10, 15)"></use>
+            </svg>
+
+            <p style="font-size: 14px;"><i class="fas fa-graduation-cap" style="color: var(--primary-pink); margin-right: 5px;"></i> Bachelor of Business Administration program in Digital Business Innovation, Maejo University</p>
+            <p style="margin-top: 10px; color: var(--text-light); font-size: 14px; line-height: 1.6;">กระผมนายชัชพงศ์ สิงคิพร (เอ็มมี่) กำลังศึกษาอยู่ชั้นปีที่ 3 มหาวิทยาลัยแม่โจ้ คณะบริหารธุรกิจ สาขานวัตกรรมธุรกิจดิจิทัล มีประสบการณ์การทำเว็บไซต์และเว็บแอปเพื่อแก้ไขปัญหาและเพิ่มประสิทธิภาพการทำงาน จากการทำงานและกิจกรรมทั้งภายในและภายนอกมหาวิทยาลัยมีความสนใจในการทำงานด้าน UX/UI Designer , Frontend Developer และ Web & Application Development</p>
         </div>
     </div>
 
-    <!-- โซนข้อมูลส่วนตัว (Personal Info) - เพิ่มใหม่ -->
-    <div class="section-title">
-        <i class="fas fa-user-circle"></i> Personal Info
+    <!-- โซนข้อมูลส่วนตัว (Personal Info) -->
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-user-circle"></i> Personal Info</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="info-grid">
         <!-- กล่องข้อมูลพื้นฐาน -->
@@ -546,9 +562,38 @@
         </div>
     </div>
 
+    <!-- เส้นคั่นดอกไม้ (ก่อนขึ้นโปรเจกต์) -->
+    <div class="cs-divider">
+        <svg width="200" height="30" viewBox="0 0 200 30">
+            <!-- ใบซ้าย -->
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="20" y="15" />
+                <use href="#x-stitch" x="30" y="5" /> <use href="#x-stitch" x="30" y="15" /> <use href="#x-stitch" x="30" y="25" />
+                <use href="#x-stitch" x="40" y="15" />
+            </g>
+            <!-- ดอกไม้ -->
+            <g class="cs-icon pink">
+                <use href="#x-stitch" x="60" y="5" /> <use href="#x-stitch" x="70" y="5" />
+                <use href="#x-stitch" x="60" y="15" /> <use href="#x-stitch" x="70" y="15" />
+                <use href="#x-stitch" x="95" y="0" /> <use href="#x-stitch" x="105" y="0" />
+                <use href="#x-stitch" x="95" y="10" /> <use href="#x-stitch" x="105" y="10" />
+                <use href="#x-stitch" x="130" y="5" /> <use href="#x-stitch" x="140" y="5" />
+                <use href="#x-stitch" x="130" y="15" /> <use href="#x-stitch" x="140" y="15" />
+            </g>
+            <!-- ใบขวา -->
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="160" y="15" />
+                <use href="#x-stitch" x="170" y="5" /> <use href="#x-stitch" x="170" y="15" /> <use href="#x-stitch" x="170" y="25" />
+                <use href="#x-stitch" x="180" y="15" />
+            </g>
+        </svg>
+    </div>
+
     <!-- รวบรวมผลงาน Web / App -->
-    <div class="section-title">
-        <i class="fas fa-laptop-code"></i> Dev Projects
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-laptop-code"></i> Dev Projects</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="portfolio-grid">
         <!-- ผลงานที่ 1 -->
@@ -621,9 +666,11 @@
         </a>
     </div>
   
-    <!-- โซนทักษะ (My Skills) - แยกออกมาให้ดูโปรขึ้น -->
-    <div class="section-title">
-        <i class="fas fa-tools"></i> My Skills
+    <!-- โซนทักษะ (My Skills) -->
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-tools"></i> My Skills</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="skills-container">
         <!-- หมวด Design -->
@@ -646,7 +693,7 @@
                 <span class="skill-tag">JavaScript</span>
                 <span class="skill-tag">FlutterFlow</span>
                 <span class="skill-tag">Supabase</span>
-                <span class="skill-tag">Visual Studio Code</span>
+                <span class="skill-tag">VS Code</span>
             </div>
         </div>
 
@@ -660,10 +707,36 @@
             </div>
         </div>
     </div>
+
+    <!-- เส้นคั่นดอกไม้ (ก่อนขึ้นผลงาน Cover) -->
+    <div class="cs-divider">
+        <svg width="200" height="30" viewBox="0 0 200 30">
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="20" y="15" />
+                <use href="#x-stitch" x="30" y="5" /> <use href="#x-stitch" x="30" y="15" /> <use href="#x-stitch" x="30" y="25" />
+                <use href="#x-stitch" x="40" y="15" />
+            </g>
+            <g class="cs-icon pink">
+                <use href="#x-stitch" x="60" y="5" /> <use href="#x-stitch" x="70" y="5" />
+                <use href="#x-stitch" x="60" y="15" /> <use href="#x-stitch" x="70" y="15" />
+                <use href="#x-stitch" x="95" y="0" /> <use href="#x-stitch" x="105" y="0" />
+                <use href="#x-stitch" x="95" y="10" /> <use href="#x-stitch" x="105" y="10" />
+                <use href="#x-stitch" x="130" y="5" /> <use href="#x-stitch" x="140" y="5" />
+                <use href="#x-stitch" x="130" y="15" /> <use href="#x-stitch" x="140" y="15" />
+            </g>
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="160" y="15" />
+                <use href="#x-stitch" x="170" y="5" /> <use href="#x-stitch" x="170" y="15" /> <use href="#x-stitch" x="170" y="25" />
+                <use href="#x-stitch" x="180" y="15" />
+            </g>
+        </svg>
+    </div>
   
-    <!-- โซนผลงานร้อง Cover (Cover Works) - เพิ่มใหม่ -->
-    <div class="section-title">
-        <i class="fas fa-microphone-alt"></i> Cover Works
+    <!-- โซนผลงานร้อง Cover (Cover Works) -->
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-microphone-alt"></i> Cover Works</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="portfolio-grid">
         <!-- Cover ที่ 1 -->
@@ -701,12 +774,13 @@
         </a>
     </div>
 
-    <!-- โซน Gallery (แกลเลอรี) - เพิ่มใหม่ -->
-    <div class="section-title">
-        <i class="fas fa-images"></i> Gallery
+    <!-- โซน Gallery (แกลเลอรี) -->
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-images"></i> Gallery</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="gallery-grid">
-        <!-- เปลี่ยนลิงก์ src เป็นรูปภาพของคุณได้เลย -->
         <img src="https://lh3.googleusercontent.com/d/1wxCQwGqjWc3fnCqFiRzEFoWa2KJcyZty=s1000" alt="Gallery 1" class="gallery-img">
         <img src="https://lh3.googleusercontent.com/d/1hxyoYziFaC4MtutaNrwAqKrHQxMj-NpX=s1000" alt="Gallery 2" class="gallery-img">
         <img src="https://lh3.googleusercontent.com/d/12tap-Tst_Re7OhW4X7vIL7iTS6GGon9k=s1000" alt="Gallery 3" class="gallery-img">
@@ -715,8 +789,10 @@
     </div>
 
     <!-- ช่องทางการติดต่อ -->
-    <div class="section-title">
-        <i class="fas fa-paper-plane"></i> Contact Me
+    <div class="cs-heading">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-paper-plane"></i> Contact Me</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="contact-container">
         <a href="https://line.me/ti/p/2MV16HkEfq" class="social-btn" target="_blank">

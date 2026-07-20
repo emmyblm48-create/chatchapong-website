@@ -391,6 +391,61 @@
             color: white;
             transform: translateY(-2px);
         }
+
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 179, 208, 0.2);
+        }
+
+        .skill-category h4 {
+            color: var(--primary-pink);
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--bg-color);
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--primary-pink);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-pink);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -557,6 +612,45 @@
             </div>
         </a>
     </div>-->
+  
+    <!-- โซนทักษะ (My Skills) - แยกออกมาให้ดูโปรขึ้น -->
+    <div class="section-title">
+        <i class="fas fa-tools"></i> My Skills
+    </div>
+    <div class="skills-container">
+        <!-- หมวด Design -->
+        <div class="skill-category">
+            <h4><i class="fas fa-palette"></i> Design</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">UX/UI Design</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Canva</span>
+                <span class="skill-tag">Web Design</span>
+            </div>
+        </div>
+
+        <!-- หมวด Development -->
+        <div class="skill-category">
+            <h4><i class="fas fa-code"></i> Development</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">FlutterFlow</span>
+                <span class="skill-tag">Supabase</span>
+            </div>
+        </div>
+
+        <!-- หมวด Media & Others -->
+        <div class="skill-category">
+            <h4><i class="fas fa-headphones"></i> Media & Audio</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">Mix Audio</span>
+                <span class="skill-tag">Video Editing</span>
+                <span class="skill-tag">Vocal</span>
+            </div>
+        </div>
+    </div>
 
     <!-- โซน Gallery (แกลเลอรี) - เพิ่มใหม่ -->
     <div class="section-title">
@@ -576,14 +670,17 @@
         <i class="fas fa-paper-plane"></i> Contact Me
     </div>
     <div class="contact-container">
-        <a href="https://github.com/emmyblm48-create" class="social-btn">
-            <i class="fab fa-github"></i> GitHub
-        </a>
         <a href="https://www.instagram.com/mmchatpong/" class="social-btn" target="_blank">
-            <i class="fab fa-instagram"></i> Instagram
+            <i class="fab fa-instagram"></i> Instagram : mmchatchapong
         </a>
         <a href="mailto:mmchatchapong@gmail.com" class="social-btn">
-            <i class="fas fa-envelope"></i> Email
+            <i class="fas fa-envelope"></i> Email : mmchatchapong@gmail.com
+        </a>
+        <a href="tel:0620702932" class="social-btn">
+            <i class="fas fa-phone-alt"></i> Phone : 0620702932
+        </a>
+        <a href="https://github.com/emmyblm48-create" class="social-btn">
+            <i class="fab fa-github"></i> GitHub
         </a>
     </div>
 

@@ -35,28 +35,84 @@
             font-family: 'Quicksand', 'Kanit', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-dark);
+            overscroll-behavior-y: none; /* ป้องกันการรีเฟรชปกติของเบราว์เซอร์ เพื่อใช้ Custom Pull-to-refresh */
             
-            /* พื้นหลังลายครอสติส (เพิ่มโค้ดหัวใจเต้น) + ไล่สีโทนชมพู-มิ้นต์ */
             background-image: 
                 url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E@keyframes beat {0% {transform: scale(1);} 15% {transform: scale(1.15);} 30% {transform: scale(1);} 45% {transform: scale(1.15);} 100% {transform: scale(1);}} .heart {transform-origin: 32px 30px; animation: beat 1.5s infinite;}%3C/style%3E%3Cg class='heart' stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23D9F9DC' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3Cpath d='M40,100 l4,4 m0,-4 l-4,4 M46,106 l4,4 m0,-4 l-4,4 M34,106 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%238e8e93' stroke-width='1.2' stroke-linecap='round' opacity='0.3'%3E%3Cpath d='M80,30 l3,3 m0,-3 l-3,3 M130,50 l3,3 m0,-3 l-3,3 M20,120 l3,3 m0,-3 l-3,3 M70,130 l3,3 m0,-3 l-3,3' /%3E%3C/g%3E%3C/svg%3E"),
                 linear-gradient(135deg, rgba(255, 179, 208, 0.25) 0%, rgba(255, 253, 249, 1) 40%, rgba(217, 249, 220, 0.4) 100%);
             
-            /* ตั้งค่าให้ลาย SVG เล่นซ้ำ และ Gradient เป็นพื้นหลังที่คงที่ */
             background-repeat: repeat, no-repeat;
             background-size: 150px 150px, cover;
             background-attachment: scroll, fixed;
-            
-            /* แอนิเมชันสำหรับเลื่อนพื้นหลัง (8 วิ) */
             animation: moveBackground 8s linear infinite;
 
             min-height: 100vh;
             padding-bottom: 50px;
         }
 
-        /* เพิ่ม Keyframes สำหรับการเลื่อนเฉียงขึ้นซ้ายแบบวนลูป (วางต่อจาก body ได้เลย) */
         @keyframes moveBackground {
             0% { background-position: 0px 0px, center center; }
             100% { background-position: -150px -150px, center center; }
+        }
+
+        /* =========================================
+           ระบบโหลดหน้าเว็บ (Preloader)
+           ========================================= */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        
+        @keyframes pulseLoad {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .preloader-heart {
+            animation: pulseLoad 1s infinite;
+        }
+
+        .preloader-text {
+            margin-top: 15px;
+            color: var(--primary-pink);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           ระบบดึงเพื่อรีเฟรช (Pull-to-Refresh)
+           ========================================= */
+        #ptr-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(255, 253, 249, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--primary-pink);
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 998; /* อยู่ใต้ Navbar */
+            transform: translateY(-100%);
+            box-shadow: 0 4px 10px rgba(255, 179, 208, 0.1);
         }
 
         /* Navbar */
@@ -70,7 +126,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
+            z-index: 1000; /* ให้ Navbar อยู่บนสุดเสมอ */
             box-shadow: 0 4px 15px rgba(255, 179, 208, 0.15);
         }
 
@@ -421,8 +477,6 @@
         /* =========================================
            Cross-Stitch Decoration Elements
            ========================================= */
-
-        /* กล่องข้อความสไตล์ครอสติส */
         .cs-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px 25px;
@@ -434,7 +488,6 @@
             position: relative;
         }
 
-        /* หัวข้อสไตล์ครอสติส (จัดให้อยู่ตรงกลางพร้อมไอคอน) */
         .cs-heading {
             display: flex;
             align-items: center;
@@ -448,7 +501,6 @@
             padding: 0 20px;
         }
 
-        /* ตั้งค่าสีให้ SVG */
         .cs-icon {
             display: inline-block;
         }
@@ -456,14 +508,12 @@
         .cs-icon.mint { color: #A0E8AF; }
         .cs-icon.blue { color: #A8D0E6; }
 
-        /* เส้นคั่นตกแต่ง (Divider) */
         .cs-divider {
             text-align: center;
             margin: 30px 0;
             opacity: 0.9;
         }
 
-        /* ตำแหน่งโบว์ประดับมุมกล่อง */
         .cs-corner-bow {
             position: absolute;
             top: -15px;
@@ -475,14 +525,11 @@
 <body>
 
     <!-- ============================================================== 
-         [สำคัญ] SVG Defs พื้นฐานสำหรับลวดลายครอสติส ซ่อนไว้เพื่อให้เรียกใช้ได้ง่าย 
+         SVG Defs พื้นฐานสำหรับลวดลายครอสติส
          ============================================================== -->
     <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
         <defs>
-            <!-- ลายปักกากบาทพื้นฐาน -->
             <path id="x-stitch" d="M-2.5,-2.5 L2.5,2.5 M-2.5,2.5 L2.5,-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            
-            <!-- รูปหัวใจ -->
             <g id="cs-heart">
                 <use href="#x-stitch" x="10" y="0" /> <use href="#x-stitch" x="30" y="0" />
                 <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" /> <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" /> <use href="#x-stitch" x="40" y="10" />
@@ -490,23 +537,35 @@
                 <use href="#x-stitch" x="10" y="30" /> <use href="#x-stitch" x="20" y="30" /> <use href="#x-stitch" x="30" y="30" />
                 <use href="#x-stitch" x="20" y="40" />
             </g>
-
-            <!-- รูปโบว์มุมกล่อง -->
             <g id="cs-bow">
-                <!-- ปีกซ้าย -->
                 <use href="#x-stitch" x="0" y="0" /> <use href="#x-stitch" x="10" y="0" />
                 <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" />
-                <!-- ตรงกลาง -->
                 <use href="#x-stitch" x="15" y="15" />
-                <!-- ปีกขวา -->
                 <use href="#x-stitch" x="20" y="0" /> <use href="#x-stitch" x="30" y="0" />
                 <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" />
-                <!-- หาง -->
                 <use href="#x-stitch" x="5" y="20" /> <use href="#x-stitch" x="25" y="20" />
                 <use href="#x-stitch" x="0" y="30" /> <use href="#x-stitch" x="30" y="30" />
             </g>
         </defs>
     </svg>
+
+    <!-- ============================================================== 
+         หน้าจอโหลด (Preloader)
+         ============================================================== -->
+    <div id="preloader">
+        <svg width="50" height="50" viewBox="0 0 60 60" class="cs-icon pink preloader-heart">
+            <use href="#cs-heart" transform="translate(5, 5)"></use>
+        </svg>
+        <div class="preloader-text">Loading...</div>
+    </div>
+
+    <!-- ============================================================== 
+         แถบดึงเพื่อรีเฟรช (Pull-to-Refresh Indicator)
+         ============================================================== -->
+    <div id="ptr-indicator">
+        <i class="fas fa-arrow-down" id="ptr-icon"></i>
+        <span id="ptr-text">ดึงลงเพื่อรีเฟรช</span>
+    </div>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -522,7 +581,6 @@
         <h1 class="profile-name">Chatchapong Singkhiporn</h1>
         <p class="profile-role"><i class="fas fa-star" style="color: #ffd700; margin-right: 5px;"></i>Worry less, smile more</p>
         
-        <!-- กล่องแนะนำตัวที่ปรับเป็นสไตล์ครอสติส -->
         <div class="cs-card" style="text-align: left;">
             <svg width="50" height="50" viewBox="0 0 50 50" class="cs-icon blue cs-corner-bow">
                 <use href="#cs-bow" transform="translate(10, 15)"></use>
@@ -540,7 +598,6 @@
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="info-grid">
-        <!-- กล่องข้อมูลพื้นฐาน -->
         <div class="info-card">
             <h3><i class="fas fa-address-card"></i> About Me</h3>
             <ul>
@@ -550,7 +607,6 @@
                 <li><strong>Location:</strong> Chiang Mai, Thailand</li>
             </ul>
         </div>
-        <!-- กล่องสิ่งที่ชอบและทักษะ -->
         <div class="info-card">
             <h3><i class="fas fa-heart"></i> Hobbies & Skills</h3>
             <ul>
@@ -562,16 +618,14 @@
         </div>
     </div>
 
-    <!-- เส้นคั่นดอกไม้ (ก่อนขึ้นโปรเจกต์) -->
+    <!-- เส้นคั่นดอกไม้ -->
     <div class="cs-divider">
         <svg width="200" height="30" viewBox="0 0 200 30">
-            <!-- ใบซ้าย -->
             <g class="cs-icon mint">
                 <use href="#x-stitch" x="20" y="15" />
                 <use href="#x-stitch" x="30" y="5" /> <use href="#x-stitch" x="30" y="15" /> <use href="#x-stitch" x="30" y="25" />
                 <use href="#x-stitch" x="40" y="15" />
             </g>
-            <!-- ดอกไม้ -->
             <g class="cs-icon pink">
                 <use href="#x-stitch" x="60" y="5" /> <use href="#x-stitch" x="70" y="5" />
                 <use href="#x-stitch" x="60" y="15" /> <use href="#x-stitch" x="70" y="15" />
@@ -580,7 +634,6 @@
                 <use href="#x-stitch" x="130" y="5" /> <use href="#x-stitch" x="140" y="5" />
                 <use href="#x-stitch" x="130" y="15" /> <use href="#x-stitch" x="140" y="15" />
             </g>
-            <!-- ใบขวา -->
             <g class="cs-icon mint">
                 <use href="#x-stitch" x="160" y="15" />
                 <use href="#x-stitch" x="170" y="5" /> <use href="#x-stitch" x="170" y="15" /> <use href="#x-stitch" x="170" y="25" />
@@ -596,7 +649,6 @@
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="portfolio-grid">
-        <!-- ผลงานที่ 1 -->
         <a href="https://blm48-membership.vercel.app/" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <div class="slider-wrapper">
@@ -616,7 +668,6 @@
                 </div>
             </div>
         </a>
-        <!-- ผลงานที่ 2 -->
         <a href="https://sites.google.com/view/blm48/home" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <div class="slider-wrapper">
@@ -632,7 +683,6 @@
                 </div>
             </div>
         </a>
-        <!-- ผลงานที่ 3 -->
         <a href="https://youtu.be/B-Ghh9YuHi0" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <div class="slider-wrapper">
@@ -648,7 +698,6 @@
                 </div>
             </div>
         </a>
-        <!-- ผลงานที่ 4 -->
         <a href="https://www.figma.com/design/pKN4g4OQTebmRHHPv2a5G1/%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%94%E0%B8%B4-DAIDI-?node-id=402-720&t=7a023PPW5wQNGavC-1" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <div class="slider-wrapper">
@@ -673,7 +722,6 @@
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="skills-container">
-        <!-- หมวด Design -->
         <div class="skill-category">
             <h4><i class="fas fa-palette"></i> Design</h4>
             <div class="skill-tags">
@@ -683,8 +731,6 @@
                 <span class="skill-tag">Web Design</span>
             </div>
         </div>
-
-        <!-- หมวด Development -->
         <div class="skill-category">
             <h4><i class="fas fa-code"></i> Development</h4>
             <div class="skill-tags">
@@ -696,8 +742,6 @@
                 <span class="skill-tag">VS Code</span>
             </div>
         </div>
-
-        <!-- หมวด Media & Others -->
         <div class="skill-category">
             <h4><i class="fas fa-headphones"></i> Media & Audio</h4>
             <div class="skill-tags">
@@ -708,7 +752,7 @@
         </div>
     </div>
 
-    <!-- เส้นคั่นดอกไม้ (ก่อนขึ้นผลงาน Cover) -->
+    <!-- เส้นคั่นดอกไม้ -->
     <div class="cs-divider">
         <svg width="200" height="30" viewBox="0 0 200 30">
             <g class="cs-icon mint">
@@ -739,7 +783,6 @@
         <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
     </div>
     <div class="portfolio-grid">
-        <!-- Cover ที่ 1 -->
         <a href="https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <img src="https://lh3.googleusercontent.com/d/17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU=s1000" alt="Cover 1" class="work-thumbnail">
@@ -755,8 +798,6 @@
                 </div>
             </div>
         </a>
-        
-        <!-- Cover ที่ 2 -->
         <a href="https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933" class="work-card" target="_blank">
             <div class="work-thumbnail-container">
                 <img src="https://lh3.googleusercontent.com/d/1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p=s1000" alt="Cover 2" class="work-thumbnail">
@@ -814,11 +855,27 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const containers = document.querySelectorAll('.work-thumbnail-container');
+    // ==========================================
+    // 1. ระบบซ่อนหน้าโหลดเข้าเว็บ (Preloader)
+    // ==========================================
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        // ถ่วงเวลาสักนิดให้ได้เห็นหัวใจเต้น แล้วค่อยๆ เฟดออก
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 600); 
+        }, 500); 
+    });
 
+    // ==========================================
+    // 2. ระบบสไลด์รูปโปรเจกต์
+    // ==========================================
+    const containers = document.querySelectorAll('.work-thumbnail-container');
     containers.forEach(container => {
         const wrapper = container.querySelector('.slider-wrapper');
-        if (!wrapper) return; // ข้ามถ้าไม่มี slider
+        if (!wrapper) return; 
         
         const slides = container.querySelectorAll('.work-thumbnail');
         const dots = container.querySelectorAll('.dot');
@@ -840,6 +897,79 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             setInterval(nextSlide, 3000); 
         }
+    });
+
+    // ==========================================
+    // 3. ระบบดึงหน้าจอเพื่อรีเฟรช (Pull to Refresh)
+    // ==========================================
+    let startY = 0;
+    let currentY = 0;
+    let isPulling = false;
+    const ptrIndicator = document.getElementById('ptr-indicator');
+    const ptrText = document.getElementById('ptr-text');
+    const ptrIcon = document.getElementById('ptr-icon');
+
+    // จับจังหวะตอนเริ่มแตะหน้าจอ (บนมือถือ)
+    document.addEventListener('touchstart', (e) => {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+            isPulling = true;
+            ptrIndicator.style.transition = 'none'; 
+        }
+    }, {passive: true});
+
+    // จับจังหวะตอนลากนิ้ว
+    document.addEventListener('touchmove', (e) => {
+        if (!isPulling) return;
+        currentY = e.touches[0].clientY;
+        const pullDistance = currentY - startY;
+
+        // ถ้าลากลงมาด้านล่าง และอยู่บนสุดของเว็บ
+        if (pullDistance > 0 && window.scrollY === 0) {
+            let translateY = pullDistance - 60; // เริ่มจาก -60px ให้ค่อยๆ เลื่อนลงมา
+            if (translateY > 15) translateY = 15; // จำกัดระยะไม่ให้ลงมาเยอะเกินไป
+            
+            ptrIndicator.style.transform = `translateY(${Math.min(15, translateY)}px)`;
+            
+            // ถ้าลากลงมาเกิน 80px ให้เปลี่ยนข้อความพร้อมปล่อย
+            if (pullDistance > 80) {
+                ptrText.innerText = "ปล่อยเพื่อรีเฟรช";
+                ptrIcon.className = "fas fa-arrow-up";
+            } else {
+                ptrText.innerText = "ดึงลงเพื่อรีเฟรช";
+                ptrIcon.className = "fas fa-arrow-down";
+            }
+        }
+    }, {passive: true});
+
+    // จับจังหวะตอนปล่อยนิ้ว
+    document.addEventListener('touchend', () => {
+        if (!isPulling) return;
+        isPulling = false;
+        
+        const pullDistance = currentY - startY;
+        ptrIndicator.style.transition = 'transform 0.3s ease';
+
+        // ถ้าลากลงมามากพอ ให้ทำการรีเฟรชหน้า
+        if (pullDistance > 80 && window.scrollY === 0) {
+            ptrText.innerText = "กำลังรีเฟรช...";
+            ptrIcon.className = "fas fa-spinner fa-spin";
+            ptrIndicator.style.transform = `translateY(0px)`;
+            
+            setTimeout(() => {
+                location.reload();
+            }, 600);
+        } else {
+            // ถ้าดึงลงมาไม่พอ ให้ซ่อนแถบกลับไปที่เดิม
+            ptrIndicator.style.transform = `translateY(-100%)`;
+            setTimeout(() => {
+                ptrText.innerText = "ดึงลงเพื่อรีเฟรช";
+                ptrIcon.className = "fas fa-arrow-down";
+            }, 300);
+        }
+        
+        currentY = 0;
+        startY = 0;
     });
 });
 </script>

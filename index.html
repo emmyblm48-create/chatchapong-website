@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmy — Portfolio</title>
+    <meta name="description" content="Portfolio ของ ชัชพงศ์ สิงคิพร (เอ็มมี่) — UX/UI Designer & Frontend Developer รวมผลงานเว็บไซต์ แอป กราฟิก และ Cover">
+    <meta name="theme-color" content="#FFB3D0">
+
+    <!-- รูปพรีวิวเวลาแชร์ลิงก์ (LINE / Facebook / X / Discord)
+         เมื่ออัปขึ้นโฮสต์แล้ว ให้เปลี่ยน previews/og-image.png เป็น URL เต็ม เช่น https://your-domain.vercel.app/previews/og-image.png -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Emmy — UX/UI Designer & Frontend Developer">
+    <meta property="og:description" content="รวมผลงานเว็บไซต์ แอป กราฟิก และ Cover ของเอ็มมี่ ✿">
+    <meta property="og:image" content="previews/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="previews/og-image.png">
+
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s32">
+    <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s180">
+    <meta name="apple-mobile-web-app-title" content="Emmy">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --pink: #FFB3D0;
+            --pink-deep: #C94A7E;
+            --pink-soft: #FFE6F0;
+            --mint: #D9F9DC;
+            --mint-deep: #7FD39A;
+            --blue: #A8D0E6;
+            --bg: #FFFDF9;
+            --card: rgba(255, 255, 255, 0.92);
+            --text: #3F3A3C;
+            --muted: #6F6870;
+            --line: #F6DCE7;
+            --shadow: 0 10px 30px rgba(240, 127, 170, 0.12);
+            --radius: 22px;
+            --max: 1100px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+        body {
+            font-family: 'Quicksand', 'Kanit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23A0E8AF' stroke-width='1.5' stroke-linecap='round' opacity='.6'%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(135deg, rgba(255,179,208,.22) 0%, rgba(255,253,249,1) 45%, rgba(217,249,220,.45) 100%);
+            background-repeat: repeat, no-repeat;
+            background-size: 150px 150px, cover;
+            background-attachment: scroll, fixed;
+        }
+
+        a { color: inherit; }
+        img { display: block; max-width: 100%; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+        /* ---------- Preloader ---------- */
+        #preloader {
+            position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity .5s ease, visibility .5s ease;
+        }
+        #preloader.hide { opacity: 0; visibility: hidden; }
+        .preloader-heart { color: var(--pink); animation: pulse 1s infinite; }
+        .preloader-text { margin-top: 14px; color: var(--pink-deep); font-weight: 700; letter-spacing: 2px; font-size: 14px; }
+        @keyframes pulse { 50% { transform: scale(1.15); } }
+
+        /* ---------- Top nav ---------- */
+        .navbar {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255, 253, 249, .82);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+        .navbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .brand { font-size: 22px; font-weight: 700; color: var(--pink-deep); text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted);
+            padding: 8px 14px; border-radius: 999px; transition: background .2s, color .2s;
+        }
+        .nav-links a:hover, .nav-links a.active { background: var(--pink-soft); color: var(--pink-deep); }
+        .nav-cta {
+            text-decoration: none; font-size: 14px; font-weight: 700; color: #fff;
+            background: var(--pink-deep); padding: 9px 18px; border-radius: 999px;
+            box-shadow: 0 6px 16px rgba(240,127,170,.35); transition: transform .2s;
+        }
+        .nav-cta:hover { transform: translateY(-2px); }
+
+        /* ---------- Bottom nav (mobile) ---------- */
+        .bottom-nav {
+            display: none; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 1000;
+            background: rgba(255,255,255,.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 8px 30px rgba(240,127,170,.2);
+            justify-content: space-around; padding: 8px 4px;
+        }
+        .bottom-nav a {
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            text-decoration: none; font-size: 11.5px; font-weight: 700; color: var(--muted);
+            padding: 6px 8px; border-radius: 12px; transition: color .2s, background .2s;
+        }
+        .bottom-nav a i { font-size: 18px; }
+        .bottom-nav a.active { color: var(--pink-deep); background: var(--pink-soft); }
+
+        /* ---------- Hero ---------- */
+        .hero { padding: 56px 0 24px; }
+        .hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+        .hello {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700;
+            color: var(--pink-deep); background: #fff; border: 1.5px dashed var(--pink);
+            padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+        }
+        .hello .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--mint-deep); box-shadow: 0 0 0 4px rgba(127,211,154,.25); }
+        .hero h1 { font-size: clamp(34px, 5vw, 54px); line-height: 1.12; font-weight: 700; letter-spacing: -.5px; }
+        .hero h1 .accent { color: var(--pink-deep); }
+        .hero .thai-name { font-family: 'Kanit', sans-serif; font-size: 18px; color: var(--muted); margin-top: 6px; }
+        .roles { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+        .role {
+            font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 999px; background: #fff;
+            border: 1px solid var(--line);
+        }
+        .role i { margin-right: 6px; }
+        .role:nth-child(1) i { color: var(--pink-deep); }
+        .role:nth-child(2) i { color: var(--mint-deep); }
+        .role:nth-child(3) i { color: #6FAFD3; }
+        .hero p.intro { font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 16px; color: #5d575a; max-width: 560px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 15px;
+            padding: 13px 22px; border-radius: 16px; transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-primary { background: var(--pink-deep); color: #fff; box-shadow: 0 10px 22px rgba(240,127,170,.35); }
+        .btn-ghost { background: #fff; color: var(--pink-deep); border: 1.5px solid var(--pink); }
+        .btn:hover { transform: translateY(-3px); }
+
+        .hero-visual { position: relative; justify-self: center; }
+        .photo-frame {
+            width: min(340px, 78vw); aspect-ratio: 1; border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+            padding: 6px; background: linear-gradient(135deg, var(--pink), var(--mint));
+            box-shadow: 0 25px 50px rgba(240,127,170,.25); animation: blob 10s ease-in-out infinite;
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; border: 5px solid #fff; }
+        @keyframes blob { 50% { border-radius: 55% 45% 40% 60% / 55% 50% 50% 45%; } }
+        .float-chip {
+            position: absolute; background: #fff; border: 1px solid var(--line); border-radius: 16px;
+            padding: 10px 14px; font-size: 13px; font-weight: 700; box-shadow: var(--shadow);
+            display: flex; align-items: center; gap: 8px; white-space: nowrap; animation: floaty 4s ease-in-out infinite;
+        }
+        .float-chip.one { top: 8%; left: -12%; }
+        .float-chip.two { bottom: 10%; right: -10%; animation-delay: -2s; }
+        .float-chip i { color: var(--pink-deep); }
+        @keyframes floaty { 50% { transform: translateY(-8px); } }
+
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 44px; }
+        .stat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; text-align: center; }
+        .stat b { display: block; font-size: 26px; color: var(--pink-deep); line-height: 1.1; }
+        .stat span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+
+        /* ---------- Section heading (cross-stitch) ---------- */
+        section { padding: 40px 0 10px; }
+        .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+        .sec-title { display: flex; align-items: center; gap: 12px; }
+        .sec-title svg { color: var(--pink); flex-shrink: 0; }
+        .sec-title h2 { font-size: 26px; line-height: 1.2; }
+        .sec-title small { display: block; font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 14px; color: var(--muted); }
+
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+        .chip {
+            font-family: inherit; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 999px;
+            background: #fff; color: var(--muted); border: 1px solid var(--line); cursor: pointer; transition: all .2s;
+        }
+        .chip.active, .chip:hover { background: var(--pink-soft); color: var(--pink-deep); border-color: var(--pink); }
+
+        /* ---------- About ---------- */
+        .about-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 18px; }
+        .card {
+            background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 22px; box-shadow: var(--shadow); position: relative;
+        }
+        .card.stitched { border: 2px dashed var(--pink-soft); }
+        .card h3 { font-size: 16px; color: var(--pink-deep); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .card p, .card li { font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 14.5px; }
+        .kv { list-style: none; }
+        .kv li { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--line); }
+        .kv li:last-child { border-bottom: none; }
+        .kv strong { font-family: 'Quicksand', sans-serif; font-weight: 600; color: var(--muted); min-width: 82px; font-size: 13px; }
+        .edu { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+        .edu i { color: var(--pink-deep); font-size: 20px; margin-top: 4px; }
+        .corner-bow { position: absolute; top: -16px; right: -12px; transform: rotate(15deg); color: var(--blue); }
+
+        .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag {
+            font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px;
+            background: var(--bg); border: 1px solid var(--pink); transition: all .2s;
+        }
+        .skill-tag:hover { background: var(--pink); color: #fff; }
+
+        /* ---------- Website showcase (browser mockup) ---------- */
+        .sites { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .site-card {
+            background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); text-decoration: none; display: flex; flex-direction: column;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .site-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(240,127,170,.22); }
+        .browser { margin: 16px 16px 0; border-radius: 14px 14px 0 0; overflow: hidden; border: 1px solid var(--line); border-bottom: none; background: #fff; }
+        .browser-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #FFF4F8; border-bottom: 1px solid var(--line); }
+        .browser-bar i.c { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .browser-bar i.c:nth-child(1) { background: #FF9AAE; }
+        .browser-bar i.c:nth-child(2) { background: #FFD58A; }
+        .browser-bar i.c:nth-child(3) { background: #9FE0B0; }
+        .url {
+            flex: 1; margin-left: 8px; font-size: 11.5px; color: var(--muted); background: #fff; border: 1px solid var(--line);
+            border-radius: 8px; padding: 3px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .url i { color: var(--mint-deep); margin-right: 5px; }
+        .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--pink-soft); position: relative; }
+        .shot img { width: 100%; height: auto; min-height: 100%; object-fit: cover; object-position: top; transition: transform 4s ease; }
+        .site-card:hover .shot img.tall { transform: translateY(calc(-100% + 100px)); }
+        .site-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .site-body h3 { font-size: 18px; }
+        .site-body p { font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 14px; color: var(--muted); }
+        .site-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 8px; }
+        .visit { font-size: 13px; font-weight: 700; color: var(--pink-deep); display: inline-flex; gap: 6px; align-items: center; }
+        .site-card:hover .visit i { transform: translateX(4px); }
+        .visit i { transition: transform .2s; }
+
+        /* ---------- Generic work cards ---------- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .work {
+            background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+            box-shadow: var(--shadow); text-decoration: none; display: flex; flex-direction: column;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .work:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(240,127,170,.2); }
+        .thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--pink-soft); }
+        .thumb .track { display: flex; height: 100%; transition: transform .5s cubic-bezier(.25,1,.5,1); }
+        .thumb img { width: 100%; height: 100%; flex-shrink: 0; object-fit: cover; transition: transform .4s; }
+        .work:hover .thumb img { transform: scale(1.04); }
+        .thumb .play {
+            position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 42px;
+            text-shadow: 0 4px 14px rgba(240,127,170,.6); pointer-events: none;
+        }
+        .badge {
+            position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 700; color: var(--pink-deep);
+            background: rgba(255,255,255,.92); padding: 4px 10px; border-radius: 999px;
+        }
+        .dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; background: rgba(255,255,255,.55); padding: 4px 8px; border-radius: 999px; }
+        .dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.95); transition: all .3s; }
+        .dots span.on { width: 14px; border-radius: 3px; background: var(--pink-deep); }
+        .work-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .work-body h3 { font-family: 'Kanit', 'Quicksand', sans-serif; font-weight: 500; font-size: 15px; line-height: 1.4;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .work-body p { font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 13px; color: var(--muted); }
+        .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+        .tag { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--pink-soft); border: 1px solid var(--pink); }
+        .tag.mint { background: var(--mint); border-color: #A0E8AF; }
+
+        .more-wrap { text-align: center; margin-top: 20px; }
+        .hidden-item { display: none !important; }
+
+        /* ---------- Gallery ---------- */
+        .gallery { columns: 4 180px; column-gap: 14px; }
+        .gallery button { all: unset; display: block; margin-bottom: 14px; cursor: zoom-in; border-radius: 18px; overflow: hidden; border: 4px solid #fff; box-shadow: var(--shadow); break-inside: avoid; }
+        .gallery img { width: 100%; transition: transform .4s; }
+        .gallery button:hover img { transform: scale(1.06); }
+        .gallery button:focus-visible { outline: 3px solid var(--pink-deep); }
+
+        /* ---------- Lightbox ---------- */
+        .lightbox { position: fixed; inset: 0; background: rgba(40, 25, 32, .85); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 85vh; border-radius: 16px; border: 5px solid #fff; }
+        .lb-btn { position: absolute; background: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; color: var(--pink-deep); font-size: 18px; cursor: pointer; }
+        .lb-close { top: 18px; right: 18px; }
+        .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 18px; top: 50%; transform: translateY(-50%); }
+
+        /* ---------- Contact ---------- */
+        .contact-card {
+            text-align: center; padding: 40px 24px; border-radius: 28px;
+            background: linear-gradient(135deg, #FFE6F0 0%, #FFF6FA 50%, #E7FBEA 100%);
+            border: 2px dashed var(--pink); position: relative;
+        }
+        .contact-card h2 { font-size: clamp(24px, 4vw, 34px); }
+        .contact-card p { font-family: 'Kanit', sans-serif; font-weight: 300; color: var(--muted); margin: 6px 0 22px; }
+        .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+        .social {
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 14px;
+            padding: 11px 20px; background: #fff; color: var(--pink-deep); border: 1.5px solid var(--pink); border-radius: 16px; transition: all .25s;
+        }
+        .social:hover { background: var(--pink-deep); color: #fff; border-color: var(--pink-deep); transform: translateY(-3px); }
+
+        footer { text-align: center; padding: 40px 20px 30px; color: var(--muted); font-size: 13px; }
+        footer svg { color: var(--pink); }
+
+        /* reveal on scroll */
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .hero .wrap { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+            .hero-visual { order: -1; }
+            .roles, .hero-actions { justify-content: center; }
+            .hero p.intro { margin: 0 auto; }
+            .about-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid .card:first-child { grid-column: 1 / -1; }
+            .skills { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 720px) {
+            body { padding-bottom: 92px; }
+            .bottom-nav { display: flex; }
+            .nav-cta { display: none; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .sites { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .float-chip.one { left: -4%; }
+            .float-chip.two { right: -4%; }
+            .grid.scroll-x {
+                display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 20px 16px; margin: 0 -20px;
+                scrollbar-width: none;
+            }
+            .grid.scroll-x::-webkit-scrollbar { display: none; }
+            .grid.scroll-x > .work { flex: 0 0 78%; scroll-snap-align: center; }
+            .grid.scroll-x > .hidden-item { display: flex !important; }
+            .grid.scroll-x + .more-wrap { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG ลายครอสติส -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <path id="x" d="M-2.5,-2.5 L2.5,2.5 M-2.5,2.5 L2.5,-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <g id="cs-heart">
+                <use href="#x" x="10" y="0"/><use href="#x" x="30" y="0"/>
+                <use href="#x" x="0" y="10"/><use href="#x" x="10" y="10"/><use href="#x" x="20" y="10"/><use href="#x" x="30" y="10"/><use href="#x" x="40" y="10"/>
+                <use href="#x" x="0" y="20"/><use href="#x" x="10" y="20"/><use href="#x" x="20" y="20"/><use href="#x" x="30" y="20"/><use href="#x" x="40" y="20"/>
+                <use href="#x" x="10" y="30"/><use href="#x" x="20" y="30"/><use href="#x" x="30" y="30"/>
+                <use href="#x" x="20" y="40"/>
+            </g>
+            <g id="cs-bow">
+                <use href="#x" x="0" y="0"/><use href="#x" x="10" y="0"/><use href="#x" x="0" y="10"/><use href="#x" x="10" y="10"/>
+                <use href="#x" x="15" y="15"/>
+                <use href="#x" x="20" y="0"/><use href="#x" x="30" y="0"/><use href="#x" x="20" y="10"/><use href="#x" x="30" y="10"/>
+                <use href="#x" x="5" y="20"/><use href="#x" x="25" y="20"/><use href="#x" x="0" y="30"/><use href="#x" x="30" y="30"/>
+            </g>
+        </defs>
+    </svg>
+
+    <div id="preloader">
+        <svg width="54" height="54" viewBox="0 0 60 60" class="preloader-heart"><use href="#cs-heart" transform="translate(7,8)"/></svg>
+        <div class="preloader-text">LOADING…</div>
+    </div>
+
+    <!-- Top Nav -->
+    <nav class="navbar">
+        <div class="wrap">
+            <a href="#home" class="brand">
+                <svg width="22" height="22" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>Emmy
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#websites">Websites</a></li>
+                <li><a href="#apps">Apps & UI</a></li>
+                <li><a href="#graphic">Graphic</a></li>
+                <li><a href="#cover">Cover</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Contact me</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero" id="home">
+        <div class="wrap">
+            <div>
+                <span class="hello"><span class="dot-live"></span> Open to internship & freelance</span>
+                <h1>Hi, I'm <span class="accent">Emmy</span> ✿<br>I design & build cute, useful web.</h1>
+                <div class="thai-name">ชัชพงศ์ สิงคิพร (เอ็มมี่)</div>
+                <div class="roles">
+                    <span class="role"><i class="fas fa-pen-nib"></i>UX/UI Designer</span>
+                    <span class="role"><i class="fas fa-code"></i>Frontend Developer</span>
+                    <span class="role"><i class="fas fa-mobile-screen"></i>Web & App Dev</span>
+                </div>
+                <p class="intro">นักศึกษาปี 4 สาขานวัตกรรมธุรกิจดิจิทัล มหาวิทยาลัยแม่โจ้ ชอบสร้างเว็บไซต์และเว็บแอปที่ช่วยแก้ปัญหาและทำให้การทำงานง่ายขึ้น — Worry less, smile more ⭐</p>
+                <div class="hero-actions">
+                    <a href="#websites" class="btn btn-primary"><i class="fas fa-laptop-code"></i> ดูผลงาน</a>
+                    <a href="#contact" class="btn btn-ghost"><i class="fas fa-paper-plane"></i> ติดต่อ</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="photo-frame">
+                    <img src="https://lh3.googleusercontent.com/d/1g7ng_xBDlocsv65HiaPVcJ41CesWqJFG=s800" alt="รูปโปรไฟล์ เอ็มมี่">
+                </div>
+                <div class="float-chip one"><i class="fas fa-heart"></i> Pink lover</div>
+                <div class="float-chip two"><i class="fas fa-music"></i> Singer & Mixer</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="stats" id="stats"></div>
+        </div>
+    </header>
+
+    <!-- About -->
+    <section id="about">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>About Me<small>ข้อมูลส่วนตัวและทักษะ</small></h2>
+                </div>
+            </div>
+            <div class="about-grid reveal">
+                <div class="card stitched">
+                    <svg class="corner-bow" width="46" height="46" viewBox="0 0 50 50"><use href="#cs-bow" transform="translate(8,10)"/></svg>
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <div class="edu">
+                        <i class="fas fa-school"></i>
+                        <div>
+                            <b style="font-size:15px">Maejo University</b>
+                            <p>Bachelor of Business Administration — Digital Business Innovation (ปี 4)</p>
+                        </div>
+                    </div>
+                    <p style="color:var(--muted)">มีประสบการณ์ทำเว็บไซต์และเว็บแอปจากการทำงานและกิจกรรมทั้งภายในและภายนอกมหาวิทยาลัย สนใจงานด้าน UX/UI Designer, Frontend Developer และ Web & Application Development</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-address-card"></i> Profile</h3>
+                    <ul class="kv">
+                        <li><strong>Name</strong> ชัชพงศ์ สิงคิพร</li>
+                        <li><strong>Nickname</strong> Emmy (เอ็มมี่)</li>
+                        <li><strong>Birthday</strong> 06 / 05 / 2005</li>
+                        <li><strong>MBTI</strong> ESFJ</li>
+                        <li><strong>Location</strong> Chiang Mai, TH</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-heart"></i> Things I love</h3>
+                    <ul class="kv">
+                        <li><strong>Likes</strong> แซลมอน ร้องเพลง สีชมพู</li>
+                        <li><strong>Hobbies</strong> ฟังเพลง, ทำเว็บไซต์</li>
+                        <li><strong>Media</strong> Mix Audio, Video Editing</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="skills reveal">
+                <div class="card"><h3><i class="fas fa-palette"></i> Design</h3>
+                    <div class="tags"><span class="skill-tag">UX/UI Design</span><span class="skill-tag">Figma</span><span class="skill-tag">Canva</span><span class="skill-tag">Adobe Express</span><span class="skill-tag">Web Design</span></div></div>
+                <div class="card"><h3><i class="fas fa-code"></i> Development</h3>
+                    <div class="tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">FlutterFlow</span><span class="skill-tag">Supabase</span><span class="skill-tag">Vercel</span><span class="skill-tag">VS Code</span></div></div>
+                <div class="card"><h3><i class="fas fa-file-lines"></i> Office & Media</h3>
+                    <div class="tags"><span class="skill-tag">Word</span><span class="skill-tag">Excel</span><span class="skill-tag">Mix Audio</span><span class="skill-tag">Video Editing</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Websites -->
+    <section id="websites">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Websites I Built<small>เว็บไซต์ที่สร้าง — เอาเมาส์วางเพื่อเลื่อนดูทั้งหน้า</small></h2>
+                </div>
+            </div>
+            <div class="sites" id="sites"></div>
+        </div>
+    </section>
+
+    <!-- Apps & UI -->
+    <section id="apps">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Apps & UI Design<small>แอปพลิเคชันและงานออกแบบ UI</small></h2>
+                </div>
+            </div>
+            <div class="grid scroll-x" id="apps-grid"></div>
+        </div>
+    </section>
+
+    <!-- Graphic -->
+    <section id="graphic">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Graphic Works<small>ออกแบบปกคลิป YouTube 16:9 — Meetfriends</small></h2>
+                </div>
+            </div>
+            <div class="grid scroll-x" id="graphic-grid"></div>
+            <div class="more-wrap"><button class="btn btn-ghost" id="graphic-more"><i class="fas fa-plus"></i> ดูเพิ่มเติม</button></div>
+        </div>
+    </section>
+
+    <!-- Cover -->
+    <section id="cover">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Cover Works<small>ร้องและมิกซ์เสียง</small></h2>
+                </div>
+            </div>
+            <div class="grid scroll-x" id="cover-grid"></div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Gallery<small>แตะที่รูปเพื่อดูขนาดใหญ่</small></h2>
+                </div>
+            </div>
+            <div class="gallery reveal" id="gallery-grid"></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact-card reveal">
+                <svg class="corner-bow" width="52" height="52" viewBox="0 0 50 50"><use href="#cs-bow" transform="translate(8,10)"/></svg>
+                <h2>Let's make something cute together ✿</h2>
+                <p>สนใจร่วมงาน ฝึกงาน หรือจ้างทำเว็บไซต์ ทักมาได้เลย</p>
+                <div class="socials">
+                    <a href="https://line.me/ti/p/2MV16HkEfq" class="social" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE</a>
+                    <a href="https://www.instagram.com/mmchatpong/" class="social" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="mailto:mmchatchapong@gmail.com" class="social"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:0620702932" class="social"><i class="fas fa-phone"></i> Phone</a>
+                    <a href="https://github.com/emmyblm48-create" class="social" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <svg width="20" height="20" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+        <div>© <span id="year"></span> Emmy — Made with pink & cross-stitches</div>
+    </footer>
+
+    <!-- Bottom nav (mobile) -->
+    <nav class="bottom-nav" aria-label="เมนูมือถือ">
+        <a href="#home"><i class="fas fa-house"></i>Home</a>
+        <a href="#about"><i class="fas fa-user"></i>About</a>
+        <a href="#websites"><i class="fas fa-laptop-code"></i>Work</a>
+        <a href="#graphic"><i class="fas fa-paintbrush"></i>Graphic</a>
+        <a href="#contact"><i class="fas fa-paper-plane"></i>Contact</a>
+    </nav>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="ดูรูปขนาดใหญ่">
+        <button class="lb-btn lb-close" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <button class="lb-btn lb-prev" aria-label="รูปก่อนหน้า"><i class="fas fa-chevron-left"></i></button>
+        <img alt="">
+        <button class="lb-btn lb-next" aria-label="รูปถัดไป"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+<script>
+/* =========================================================
+   ข้อมูลผลงาน — แก้/เพิ่มผลงานได้ที่นี่ที่เดียว
+   ========================================================= */
+const drive = (id, size = 1000) => `https://lh3.googleusercontent.com/d/${id}=s${size}`;
+
+// เว็บไซต์ที่สร้าง: preview = รูปที่สร้างอัตโนมัติด้วย make-previews (ในโฟลเดอร์ previews/)
+// fallback = รูปสำรองถ้าไฟล์ preview ยังไม่มี
+const websites = [
+    {
+        title: 'BLM48 Official Web App',
+        desc: 'เว็บแอปรวมข่าวสาร ตารางกิจกรรม และระบบสมาชิกของ Virtual Idol Cover Group BLM48',
+        url: 'https://blm48-membership.vercel.app/',
+        preview: 'previews/blm48-membership.png', scroll: false,
+        fallback: drive('1gv_GDnIcPCYS-9uZx2wcn1Q6HziV-j6M'),
+        tags: ['Web App', 'HTML/CSS/JS', 'Vercel']
+    },
+    {
+        title: 'BLM48 Official Website',
+        desc: 'เว็บไซต์ทางการของ BLM48 | Virtual Idol Cover',
+        url: 'https://blm48.vercel.app/',
+        preview: 'previews/blm48.png',
+        fallback: drive('1NQTKcl_qiE_5Y9tX4xaPKnTcaJ9YwrqY'),
+        tags: ['Website', 'HTML/CSS', 'Vercel']
+    }
+    // เพิ่มเว็บใหม่: คัดลอกบล็อก { ... } ด้านบน แล้วรัน make-previews.ps1 เพื่อสร้างรูปพรีวิว
+];
+
+const apps = [
+    { title: 'BLM48 Membership — Screens', desc: 'หน้าจอเว็บแอป BLM48', url: 'https://blm48-membership.vercel.app/',
+      images: ['1gv_GDnIcPCYS-9uZx2wcn1Q6HziV-j6M', '1sLx22IhNcuC1YQU512D8TVEcf16GgZWg', '1dpMB9D9OJOJynUe1eGtAK1TGdqc6TtYY'], tags: ['Web App', 'UI'], badge: 'Web App' },
+    { title: 'Dormitory', desc: 'แอปแจ้งซ่อมและดูแลหอพัก', url: 'https://youtu.be/B-Ghh9YuHi0',
+      images: ['1jsfuFC6KbbASyuUwocNxTxkIOfUcK-Yl'], tags: ['FlutterFlow', 'Supabase'], badge: 'Mobile App', play: true },
+    { title: 'DAIDI — ได้ดิ', desc: 'แอปรวมร้านค้าสินค้า Digital Product', url: 'https://www.figma.com/design/pKN4g4OQTebmRHHPv2a5G1/%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%94%E0%B8%B4-DAIDI-?node-id=402-720&t=7a023PPW5wQNGavC-1',
+      images: ['1teBDpE9vtTlH5rK0sIaFK2x0RsTox9d8'], tags: ['Figma', 'Canva'], badge: 'UI Design' }
+];
+
+const graphics = [
+    ['วันศิลป์ พีระศรี 2025 ชาวศิลปากรต้องสะเทือน พวกหนูจะวาด รูปอะไรให้พวกพี่เนี้ยะะ !! 😳', 'https://youtu.be/5hPhJwYcpJE', '1Z8GuRpjc8XA2sfx8TdxIibya-hthtBx5'],
+    ['จิบน้ำชา2025🥂งานรับน้องเข้าเอก นิเทศศิลปากร!! ปีนี้พวกพี่...ขอมาเอาคืน!!!😮', 'https://youtu.be/awQFG-Lo254', '1YuOJe2UoBKpocBrm4LYKYV5BJb8kzzfc'],
+    ['เบื้องหลังละครนิเทศศิลปากร กับเรื่องราวที่คนเบื้องหน้าอาจไม่รู้ คลิปนี้มีเสียน้ำตา!!', 'https://youtu.be/glDbjzeo_w4', '16pT_XL1OncacDSHmbukY97rcStS8mNPy'],
+    ['GUI NIGHT 2025 ✨กลับมาแล้ว!! ที่สุดของงานชาวนิเทศศิลปากร กับธีม "หนังในดวงใจ"🎬', 'https://youtu.be/rFVVDJUY018', '17nfByoMFzT_EXrSlvn5VOvlDPyOwuVrc'],
+    ['RECAP | ชีวิตนักศึกษา ปี2 กับ #นิเทศศิลปากร สรุปจะไปต่อหรือพอแค่นี้👀', 'https://youtu.be/752yHLICbcs', '1BaxswmyhOc6z_IQFO2nrGsgmOrWVWmOe'],
+    ['⚽VLOG บุกกีฬาสี ศิลปากรในงาน "SUสีเกมส์ 2024" !!! | EP.43', 'https://youtu.be/6ARSBmDfzbk', '1uS6jD5p-fz1yVhaaYDF0yfQMntx1YvII'],
+    ['🎈VLOG ครั้งแรกกับงานวันอาจารย์ศิลป์...เป็นครั้งแรกที่โคตรจะฟิน💚 | EP.41', 'https://youtu.be/1LAyswNWNuQ', '1ok1z0WoTEHOz-98puTlOhR1_l4dCvyCB'],
+    ['เทสดีย์พี่บอกต่อ EP.3 | ถ้าเป็นโจรสลัด 1 วัน อยากจะปล้นอะไร!!!', 'https://youtu.be/AOQUMUdsk4A', '1DhbbQGZe31AuNNoW3i-CLNV19Hhw4XQ1']
+];
+
+const covers = [
+    { title: 'รักเทอที่สุดในจักรยาน (You-niverse)', desc: 'Artist: STANG Tarisa · INDYCAMP 2023', url: 'https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164', images: ['17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU'] },
+    { title: 'เอาปากกามาวง', desc: 'Artist: Bell Warisara · Home Run Music', url: 'https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933', images: ['1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p'] }
+];
+
+const gallery = ['1wxCQwGqjWc3fnCqFiRzEFoWa2KJcyZty', '1hxyoYziFaC4MtutaNrwAqKrHQxMj-NpX', '12tap-Tst_Re7OhW4X7vIL7iTS6GGon9k', '1M0TCt2ytYHvA_faw9AJ9M9JxwsMA4lq3', '1ZIk4B7shly5Ga7-a-nZta2yBgq01J7Ry'];
+
+/* =========================================================
+   Render
+   ========================================================= */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const host = u => new URL(u).host;
+
+document.getElementById('stats').innerHTML = [
+    [websites.length + apps.length - 1, 'Web & App Projects'],
+    [graphics.length, 'Thumbnail Designs'],
+    [covers.length, 'Vocal Covers'],
+    ['4th', 'Year @ Maejo']
+].map(([n, l]) => `<div class="stat reveal"><b>${n}${typeof n === 'number' ? '+' : ''}</b><span>${l}</span></div>`).join('');
+
+document.getElementById('sites').innerHTML = websites.map(w => `
+    <a class="site-card reveal" href="${esc(w.url)}" target="_blank" rel="noopener">
+        <div class="browser">
+            <div class="browser-bar"><i class="c"></i><i class="c"></i><i class="c"></i>
+                <span class="url"><i class="fas fa-lock"></i>${esc(host(w.url))}</span></div>
+            <div class="shot"><img class="${w.scroll === false ? '' : 'tall'}" src="${esc(w.preview)}" data-fallback="${esc(w.fallback)}" alt="ภาพพรีวิว ${esc(w.title)}" loading="lazy"></div>
+        </div>
+        <div class="site-body">
+            <h3>${esc(w.title)}</h3>
+            <p>${esc(w.desc)}</p>
+            <div class="site-foot">
+                <div class="tag-row" style="padding:0">${w.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+                <span class="visit">Visit <i class="fas fa-arrow-right"></i></span>
+            </div>
+        </div>
+    </a>`).join('');
+
+function workCard(p, opts = {}) {
+    const imgs = p.images.map(id => `<img src="${drive(id)}" alt="${esc(p.title)}" loading="lazy">`).join('');
+    const dots = p.images.length > 1 ? `<div class="dots">${p.images.map((_, i) => `<span class="${i ? '' : 'on'}"></span>`).join('')}</div>` : '';
+    return `
+    <a class="work reveal ${opts.hidden ? 'hidden-item' : ''}" href="${esc(p.url)}" target="_blank" rel="noopener">
+        <div class="thumb">
+            <div class="track">${imgs}</div>${dots}
+            ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
+            ${p.play ? '<div class="play"><i class="fas fa-circle-play"></i></div>' : ''}
+        </div>
+        <div class="work-body">
+            <h3>${esc(p.title)}</h3>
+            ${p.desc ? `<p>${esc(p.desc)}</p>` : ''}
+            <div class="tag-row">${(p.tags || []).map((t, i) => `<span class="tag ${i % 2 ? 'mint' : ''}">${esc(t)}</span>`).join('')}</div>
+        </div>
+    </a>`;
+}
+
+document.getElementById('apps-grid').innerHTML = apps.map(p => workCard(p)).join('');
+document.getElementById('graphic-grid').innerHTML = graphics.map(([title, url, id], i) =>
+    workCard({ title, url, images: [id], desc: 'ปกคลิป 16:9 · Meetfriends', tags: ['Adobe Express', 'Canva'], play: true }, { hidden: i >= 6 })).join('');
+document.getElementById('cover-grid').innerHTML = covers.map(c =>
+    workCard({ ...c, tags: ['Vocal Cover', 'Mix Audio'], badge: 'TikTok', play: true })).join('');
+document.getElementById('gallery-grid').innerHTML = gallery.map((id, i) =>
+    `<button data-i="${i}" aria-label="เปิดรูปที่ ${i + 1}"><img src="${drive(id, 600)}" alt="Gallery ${i + 1}" loading="lazy"></button>`).join('');
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// รูปพรีวิวเว็บไซต์: ถ้ายังไม่ได้สร้างไฟล์ ให้ใช้รูปสำรอง
+document.querySelectorAll('img[data-fallback]').forEach(img => {
+    img.addEventListener('error', () => {
+        if (img.src !== img.dataset.fallback) { img.src = img.dataset.fallback; img.classList.remove('tall'); }
+    });
+});
+
+// ปุ่ม "ดูเพิ่มเติม"
+const moreBtn = document.getElementById('graphic-more');
+if (!graphics.slice(6).length) moreBtn.parentElement.remove();
+moreBtn.addEventListener('click', () => {
+    document.querySelectorAll('#graphic-grid .hidden-item').forEach(el => el.classList.remove('hidden-item', 'reveal'));
+    moreBtn.parentElement.remove();
+});
+
+// สไลด์รูปในการ์ดที่มีหลายรูป
+document.querySelectorAll('.thumb').forEach(t => {
+    const track = t.querySelector('.track'), dots = t.querySelectorAll('.dots span'), n = track.children.length;
+    if (n < 2) return;
+    let i = 0;
+    setInterval(() => {
+        i = (i + 1) % n;
+        track.style.transform = `translateX(-${i * 100}%)`;
+        dots.forEach((d, k) => d.classList.toggle('on', k === i));
+    }, 3000);
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+let lbIndex = 0;
+const showLb = i => { lbIndex = (i + gallery.length) % gallery.length; lbImg.src = drive(gallery[lbIndex], 1600); lb.classList.add('open'); };
+document.getElementById('gallery-grid').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (b) showLb(+b.dataset.i);
+});
+lb.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
+lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); showLb(lbIndex - 1); };
+lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); showLb(lbIndex + 1); };
+lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lb.classList.remove('open');
+    if (e.key === 'ArrowLeft') showLb(lbIndex - 1);
+    if (e.key === 'ArrowRight') showLb(lbIndex + 1);
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+}), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ไฮไลต์เมนูตาม section ที่กำลังดู
+const navLinks = document.querySelectorAll('.nav-links a, .bottom-nav a');
+const spy = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('header[id], section[id]').forEach(s => spy.observe(s));
+
+// Preloader
+window.addEventListener('load', () => setTimeout(() => document.getElementById('preloader').classList.add('hide'), 300));
+setTimeout(() => document.getElementById('preloader').classList.add('hide'), 4000);
+</script>
+</body>
+</html>

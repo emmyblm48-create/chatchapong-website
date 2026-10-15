@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>Emmy - It'Me</title>
+    <meta name="theme-color" content="#FFB3D0">
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s32">
+    <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s180">
+    <link rel="icon" sizes="192x192" href="https://lh3.googleusercontent.com/d/1FZTJes-pU8D2H8DaQOeegrVkK53o36Xr=s192">
+    <meta name="apple-mobile-web-app-title" content="Emmy">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            var(--primary-pink): #FFB3D0;
+            --primary-pink: #FFB3D0;
+            --soft-pink: #FFE6F0;
+            --bg-color: #FFFDF9;
+            --mint-green: #D9F9DC;
+            --text-dark: #444444;
+            --text-light: #8e8e93;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', 'Kanit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E@keyframes beat {0% {transform: scale(1);} 15% {transform: scale(1.15);} 30% {transform: scale(1);} 45% {transform: scale(1.15);} 100% {transform: scale(1);}} .heart {transform-origin: 32px 30px; animation: beat 1.5s infinite;}%3C/style%3E%3Cg class='heart' stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%23D9F9DC' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M106,84 l4,4 m0,-4 l-4,4 M100,90 l4,4 m0,-4 l-4,4 M106,90 l4,4 m0,-4 l-4,4 M112,90 l4,4 m0,-4 l-4,4 M106,96 l4,4 m0,-4 l-4,4' /%3E%3Cpath d='M40,100 l4,4 m0,-4 l-4,4 M46,106 l4,4 m0,-4 l-4,4 M34,106 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3Cg stroke='%238e8e93' stroke-width='1.2' stroke-linecap='round' opacity='0.3'%3E%3Cpath d='M80,30 l3,3 m0,-3 l-3,3 M130,50 l3,3 m0,-3 l-3,3 M20,120 l3,3 m0,-3 l-3,3 M70,130 l3,3 m0,-3 l-3,3' /%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(135deg, rgba(255, 179, 208, 0.25) 0%, rgba(255, 253, 249, 1) 40%, rgba(217, 249, 220, 0.4) 100%);
+            
+            background-repeat: repeat, no-repeat;
+            background-size: 150px 150px, cover;
+            background-attachment: scroll, fixed;
+            animation: moveBackground 8s linear infinite;
+
+            min-height: 100vh;
+            /* เผื่อพื้นที่ให้ Bottom Nav */
+            padding-bottom: 80px; 
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0px 0px, center center; }
+            100% { background-position: -150px -150px, center center; }
+        }
+
+        /* =========================================
+           ระบบโหลดหน้าเว็บ (Preloader)
+           ========================================= */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        
+        @keyframes pulseLoad {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .preloader-heart {
+            animation: pulseLoad 1s infinite;
+        }
+
+        .preloader-text {
+            margin-top: 15px;
+            color: var(--primary-pink);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Navbar ด้านบน */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 253, 249, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.15);
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-pink);
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           Bottom Navigation Bar (สร้างใหม่)
+           ========================================= */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0 15px 0;
+            box-shadow: 0 -4px 15px rgba(255, 179, 208, 0.15);
+            z-index: 1000;
+            border-top: 1px solid var(--soft-pink);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 11px;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover, .nav-item:active {
+            color: var(--primary-pink);
+            transform: scale(1.1);
+        }
+
+        /* Profile Section */
+        .profile-container {
+            max-width: 800px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+            text-align: center;
+            /* เพิ่ม offset เผื่อเวลากดมาจาก Nav แล้วโดน Header บัง */
+            scroll-margin-top: 80px; 
+        }
+
+        .profile-img-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--mint-green));
+            box-shadow: 0 10px 25px rgba(255, 179, 208, 0.3);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-pink);
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        /* ----- โซนข้อมูลส่วนตัว (Personal Info Grid) ----- */
+        .info-grid {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+        }
+
+        .info-card h3 {
+            color: var(--primary-pink);
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .info-card ul li strong {
+            color: var(--text-light);
+            font-weight: 500;
+            width: 90px;
+            display: inline-block;
+        }
+
+        /* ----- โซนผลงาน (Portfolio & Cover Grid) ----- */
+        .portfolio-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--soft-pink);
+            box-shadow: 0 8px 20px rgba(255, 179, 208, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 179, 208, 0.2);
+        }
+
+        .work-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 4px 10px rgba(255, 179, 208, 0.5);
+            pointer-events: none;
+        }
+
+        .work-info {
+            padding: 16px;
+        }
+
+        .work-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .work-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 4px 10px;
+            background: var(--soft-pink);
+            color: var(--text-dark);
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid var(--primary-pink);
+        }
+
+        .work-thumbnail-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slider-wrapper .work-thumbnail {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 8px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary-pink);
+            width: 14px;
+            border-radius: 3px;
+        }
+
+        /* ----- โซน Gallery ----- */
+        .gallery-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(255, 179, 208, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 179, 208, 0.3);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            color: var(--primary-pink);
+            border: 1.5px solid var(--primary-pink);
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 179, 208, 0.1);
+        }
+
+        .social-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 179, 208, 0.2);
+        }
+
+        .skill-category h4 {
+            color: var(--primary-pink);
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--bg-color);
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--primary-pink);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-pink);
+            color: white;
+        }
+      
+        /* =========================================
+           Cross-Stitch Decoration Elements
+           ========================================= */
+        .cs-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 18px;
+            border: 2px dashed var(--soft-pink);
+            box-shadow: 0 4px 15px rgba(255, 179, 208, 0.1);
+            max-width: 800px;
+            margin: 25px auto 20px;
+            position: relative;
+        }
+
+        .cs-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--primary-pink);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px auto 20px;
+            max-width: 800px;
+            padding: 0 20px;
+            scroll-margin-top: 80px; /* Offset สำหรับ Nav */
+        }
+
+        .cs-icon {
+            display: inline-block;
+        }
+        .cs-icon.pink { color: var(--primary-pink); }
+        .cs-icon.mint { color: #A0E8AF; }
+        .cs-icon.blue { color: #A8D0E6; }
+
+        .cs-divider {
+            text-align: center;
+            margin: 30px 0;
+            opacity: 0.9;
+        }
+
+        .cs-corner-bow {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            transform: rotate(15deg);
+        }
+      
+      /* =========================================
+       การปรับแต่งสำหรับมือถือ (เลื่อนซ้าย-ขวาซ่อน Scrollbar)
+       ========================================= */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                display: flex;
+                overflow-x: auto;
+                /* ทำให้การเลื่อนหยุดแบบพอดีกับการ์ด */
+                scroll-snap-type: x mandatory; 
+                padding-bottom: 15px; /* เผื่อพื้นที่ให้เงาของการ์ดตอน hover */
+
+                /* ซ่อนแถบเลื่อน (Scrollbar) */
+                -ms-overflow-style: none;  /* สำหรับ Internet Explorer, Edge */
+                scrollbar-width: none;  /* สำหรับ Firefox */
+            }
+
+            .portfolio-grid::-webkit-scrollbar {
+                display: none; /* สำหรับ Chrome, Safari และ Opera */
+            }
+
+            .work-card {
+                /* บังคับความกว้างของการ์ดไม่ให้หดตัวตามจอ (กว้าง 280px) */
+                flex: 0 0 280px; 
+                /* ให้จังหวะเลื่อนมาหยุดที่ขอบซ้ายของการ์ดพอดี */
+                scroll-snap-align: start; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Defs พื้นฐานสำหรับลวดลายครอสติส -->
+    <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <path id="x-stitch" d="M-2.5,-2.5 L2.5,2.5 M-2.5,2.5 L2.5,-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <g id="cs-heart">
+                <use href="#x-stitch" x="10" y="0" /> <use href="#x-stitch" x="30" y="0" />
+                <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" /> <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" /> <use href="#x-stitch" x="40" y="10" />
+                <use href="#x-stitch" x="0" y="20" /> <use href="#x-stitch" x="10" y="20" /> <use href="#x-stitch" x="20" y="20" /> <use href="#x-stitch" x="30" y="20" /> <use href="#x-stitch" x="40" y="20" />
+                <use href="#x-stitch" x="10" y="30" /> <use href="#x-stitch" x="20" y="30" /> <use href="#x-stitch" x="30" y="30" />
+                <use href="#x-stitch" x="20" y="40" />
+            </g>
+            <g id="cs-bow">
+                <use href="#x-stitch" x="0" y="0" /> <use href="#x-stitch" x="10" y="0" />
+                <use href="#x-stitch" x="0" y="10" /> <use href="#x-stitch" x="10" y="10" />
+                <use href="#x-stitch" x="15" y="15" />
+                <use href="#x-stitch" x="20" y="0" /> <use href="#x-stitch" x="30" y="0" />
+                <use href="#x-stitch" x="20" y="10" /> <use href="#x-stitch" x="30" y="10" />
+                <use href="#x-stitch" x="5" y="20" /> <use href="#x-stitch" x="25" y="20" />
+                <use href="#x-stitch" x="0" y="30" /> <use href="#x-stitch" x="30" y="30" />
+            </g>
+        </defs>
+    </svg>
+
+    <!-- หน้าจอโหลด (Preloader) -->
+    <div id="preloader">
+        <svg width="50" height="50" viewBox="0 0 60 60" class="cs-icon pink preloader-heart">
+            <use href="#cs-heart" transform="translate(5, 5)"></use>
+        </svg>
+        <div class="preloader-text">Loading...</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="brand-logo" style="text-decoration: none;">Emmy</a>
+        <div style="color: var(--primary-pink);"><i class="fas fa-heart"></i></div>
+    </nav>
+
+    <!-- ประวัติส่วนตัว (Profile) -->
+    <div class="profile-container" id="profile">
+        <div class="profile-img-wrapper">
+            <img src="https://lh3.googleusercontent.com/d/1g7ng_xBDlocsv65HiaPVcJ41CesWqJFG=s1000" alt="Profile Picture" class="profile-img">
+        </div>
+        <h1 class="profile-name">Chatchapong Singkhiporn</h1>
+        <p class="profile-role"><i class="fas fa-star" style="color: #ffd700; margin-right: 5px;"></i>Worry less, smile more</p>
+        
+        <div class="cs-card" style="text-align: left;">
+            <svg width="50" height="50" viewBox="0 0 50 50" class="cs-icon blue cs-corner-bow">
+                <use href="#cs-bow" transform="translate(10, 15)"></use>
+            </svg>
+
+            <p style="font-size: 14px;"><i class="fas fa-graduation-cap" style="color: var(--primary-pink); margin-right: 5px;"></i> Bachelor of Business Administration program in Digital Business Innovation, Maejo University</p>
+            <p style="margin-top: 10px; color: var(--text-light); font-size: 14px; line-height: 1.6;">กระผมนายชัชพงศ์ สิงคิพร (เอ็มมี่) กำลังศึกษาอยู่ชั้นปีที่ 4 มหาวิทยาลัยแม่โจ้ คณะบริหารธุรกิจ สาขานวัตกรรมธุรกิจดิจิทัล มีประสบการณ์การทำเว็บไซต์และเว็บแอปเพื่อแก้ไขปัญหาและเพิ่มประสิทธิภาพการทำงาน จากการทำงานและกิจกรรมทั้งภายในและภายนอกมหาวิทยาลัยมีความสนใจในการทำงานด้าน UX/UI Designer , Frontend Developer และ Web & Application Development</p>
+        </div>
+    </div>
+
+    <!-- โซนข้อมูลส่วนตัว (Personal Info) -->
+    <div class="cs-heading" id="info">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-user-circle"></i> Personal Info</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="info-grid">
+        <div class="info-card">
+            <h3><i class="fas fa-address-card"></i> About Me</h3>
+            <ul>
+                <li><strong>Name:</strong> ชัชพงศ์ สิงคิพร</li>
+                <li><strong>Nickname:</strong> Emmy (เอ็มมี่)</li>
+                <li><strong>Age:</strong> 21 Years old</li>
+                <li><strong>Birthday:</strong> 06 / 05 / 2005</li>
+                <li><strong>MBTI:</strong> ESFJ</li>
+                <li><strong>Location:</strong> Chiang Mai, Thailand</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-heart"></i> Hobbies</h3>
+            <ul>
+                <li><strong>Likes:</strong> แซลมอน ร้องเพลง สีชมพู</li>
+                <li><strong>Hobbies:</strong> ฟังเพลง, ทำ/ปรับปรุงเว็บไซต์</li>
+                <li><strong>Audio/Video:</strong> Mix Audio, Video Editing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- เส้นคั่นดอกไม้ -->
+    <div class="cs-divider">
+        <svg width="200" height="30" viewBox="0 0 200 30">
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="20" y="15" />
+                <use href="#x-stitch" x="30" y="5" /> <use href="#x-stitch" x="30" y="15" /> <use href="#x-stitch" x="30" y="25" />
+                <use href="#x-stitch" x="40" y="15" />
+            </g>
+            <g class="cs-icon pink">
+                <use href="#x-stitch" x="60" y="5" /> <use href="#x-stitch" x="70" y="5" />
+                <use href="#x-stitch" x="60" y="15" /> <use href="#x-stitch" x="70" y="15" />
+                <use href="#x-stitch" x="95" y="0" /> <use href="#x-stitch" x="105" y="0" />
+                <use href="#x-stitch" x="95" y="10" /> <use href="#x-stitch" x="105" y="10" />
+                <use href="#x-stitch" x="130" y="5" /> <use href="#x-stitch" x="140" y="5" />
+                <use href="#x-stitch" x="130" y="15" /> <use href="#x-stitch" x="140" y="15" />
+            </g>
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="160" y="15" />
+                <use href="#x-stitch" x="170" y="5" /> <use href="#x-stitch" x="170" y="15" /> <use href="#x-stitch" x="170" y="25" />
+                <use href="#x-stitch" x="180" y="15" />
+            </g>
+        </svg>
+    </div>
+
+    <!-- รวบรวมผลงาน Web / App -->
+    <div class="cs-heading" id="dev">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-laptop-code"></i> Dev Projects</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="portfolio-grid">
+        <a href="https://blm48-membership.vercel.app/" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1gv_GDnIcPCYS-9uZx2wcn1Q6HziV-j6M=s1000" class="work-thumbnail">
+                    <img src="https://lh3.googleusercontent.com/d/1sLx22IhNcuC1YQU512D8TVEcf16GgZWg=s1000" class="work-thumbnail">
+                    <img src="https://lh3.googleusercontent.com/d/1dpMB9D9OJOJynUe1eGtAK1TGdqc6TtYY=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">BLM48 Official Web App</h3>
+                <p class="work-desc">เว็บแอพพลิเคชั่นที่รวบรวมข่าวสารของ Virtual Idol Cover Group อย่าง BLM48</p>
+                <div class="work-tags">
+                    <span class="tag">Web App</span><span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://blm48.vercel.app/" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1NQTKcl_qiE_5Y9tX4xaPKnTcaJ9YwrqY=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">BLM48 Official Website</h3>
+                <p class="work-desc">เว็บไซต์อย่างเป็นทางการของ BLM48 | Virtual Idol Cover</p>
+                <div class="work-tags">
+                    <span class="tag">Google Site</span><span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://youtu.be/B-Ghh9YuHi0" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1jsfuFC6KbbASyuUwocNxTxkIOfUcK-Yl=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">Dormitory</h3>
+                <p class="work-desc">แอปแจ้งซ่อมและดูแลหอพัก</p>
+                <div class="work-tags">
+                    <span class="tag">FlutterFlow</span><span class="tag">Supabase</span>        
+                </div>
+            </div>
+        </a>
+        <a href="https://www.figma.com/design/pKN4g4OQTebmRHHPv2a5G1/%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%94%E0%B8%B4-DAIDI-?node-id=402-720&t=7a023PPW5wQNGavC-1" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <div class="slider-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1teBDpE9vtTlH5rK0sIaFK2x0RsTox9d8=s1000" class="work-thumbnail">
+                </div>
+                <div class="slider-dots"><span class="dot active"></span></div>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">DAIDI - ได้ดิ</h3>
+                <p class="work-desc">แอปรวมร้านค้าสินค้า Digital Product</p>
+                <div class="work-tags">
+                    <span class="tag">Figma</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- โซนงาน Graphic Design ที่เพิ่มเข้ามาใหม่ -->
+    <div class="cs-heading" id="graphic">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-paint-brush"></i> Graphic Works</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="portfolio-grid">
+      
+        <a href="https://youtu.be/5hPhJwYcpJE?si=Q7XnebnM9mjOknpQ" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1Z8GuRpjc8XA2sfx8TdxIibya-hthtBx5=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">วันศิลป์ พีระศรี 2025 ชาวศิลปากรต้องสะเทือน พวกหนูจะวาด รูปอะไรให้พวกพี่เนี้ยะะ !! 😳 | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/awQFG-Lo254?si=JRVMlLTZqBYQcmgt" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1YuOJe2UoBKpocBrm4LYKYV5BJb8kzzfc=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">จิบน้ำชา2025🥂งานรับน้องเข้าเอก นิเทศศิลปากร!! ปีนี้พวกพี่...ขอมาเอาคืน!!!😮 | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/glDbjzeo_w4" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/16pT_XL1OncacDSHmbukY97rcStS8mNPy=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">เบื้องหลังละครนิเทศศิลปากร กับเรื่องราวที่คนเบื้องหน้าอาจไม่รู้ คลิปนี้มีเสียน้ำตา!! | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/rFVVDJUY018" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/17nfByoMFzT_EXrSlvn5VOvlDPyOwuVrc=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">GUI NIGHT 2025 ✨กลับมาแล้ว!! ที่สุดของงานชาวนิเทศศิลปากร กับธีม "หนังในดวงใจ"🎬 | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/752yHLICbcs" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1BaxswmyhOc6z_IQFO2nrGsgmOrWVWmOe=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">RECAP | ชีวิตนักศึกษา ปี2 กับ #นิเทศศิลปากร สรุปจะไปต่อหรือพอแค่นี้👀 | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/6ARSBmDfzbk" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1uS6jD5p-fz1yVhaaYDF0yfQMntx1YvII=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">⚽VLOG บุกกีฬาสี ศิลปากรในงาน "SUสีเกมส์ 2024" !!! | Meetfriends EP.43</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/1LAyswNWNuQ" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1ok1z0WoTEHOz-98puTlOhR1_l4dCvyCB=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">🎈VLOG ครั้งแรกกับงานวันอาจารย์ศิลป์...เป็นครั้งแรกที่โคตรจะฟิน💚 | Meetfriends EP.41</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+      
+        <a href="https://youtu.be/AOQUMUdsk4A" class="work-card">
+            <div class="work-thumbnail-container">
+                <!-- เปลี่ยน src ให้เป็นลิงก์ภาพผลงานของเอ็มมี่ -->
+                <img src="https://lh3.googleusercontent.com/d/1DhbbQGZe31AuNNoW3i-CLNV19Hhw4XQ1=s1000" class="work-thumbnail">
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">เทสดีย์พี่บอกต่อ EP.3 | ถ้าเป็นโจรสลัด 1 วัน อยากจะปล้นอะไร!!! | Meetfriends</h3>
+                <p class="work-desc">ออกแบบปกคลิปขนาด 16:9</p>
+                <div class="work-tags">
+                    <span class="tag">Adobe Express</span><span class="tag">Canva</span>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+  
+    <!-- โซนทักษะ (My Skills) -->
+    <div class="cs-heading" id="skills">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-tools"></i> My Skills</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="skills-container">
+        <div class="skill-category">
+            <h4><i class="fas fa-palette"></i> Design</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">UX/UI Design</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Canva</span>
+                <span class="skill-tag">Web Design</span>
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4><i class="fas fa-code"></i> Development</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">FlutterFlow</span>
+                <span class="skill-tag">Supabase</span>
+                <span class="skill-tag">VS Code</span>
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4><i class="fas fa-file-alt"></i> Document</h4>
+            <div class="skill-tags">
+                <span class="skill-tag">Microsoft Word</span>
+                <span class="skill-tag">Microsoft Excel</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- เส้นคั่นดอกไม้ -->
+    <div class="cs-divider">
+        <svg width="200" height="30" viewBox="0 0 200 30">
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="20" y="15" />
+                <use href="#x-stitch" x="30" y="5" /> <use href="#x-stitch" x="30" y="15" /> <use href="#x-stitch" x="30" y="25" />
+                <use href="#x-stitch" x="40" y="15" />
+            </g>
+            <g class="cs-icon pink">
+                <use href="#x-stitch" x="60" y="5" /> <use href="#x-stitch" x="70" y="5" />
+                <use href="#x-stitch" x="60" y="15" /> <use href="#x-stitch" x="70" y="15" />
+                <use href="#x-stitch" x="95" y="0" /> <use href="#x-stitch" x="105" y="0" />
+                <use href="#x-stitch" x="95" y="10" /> <use href="#x-stitch" x="105" y="10" />
+                <use href="#x-stitch" x="130" y="5" /> <use href="#x-stitch" x="140" y="5" />
+                <use href="#x-stitch" x="130" y="15" /> <use href="#x-stitch" x="140" y="15" />
+            </g>
+            <g class="cs-icon mint">
+                <use href="#x-stitch" x="160" y="15" />
+                <use href="#x-stitch" x="170" y="5" /> <use href="#x-stitch" x="170" y="15" /> <use href="#x-stitch" x="170" y="25" />
+                <use href="#x-stitch" x="180" y="15" />
+            </g>
+        </svg>
+    </div>
+  
+    <!-- โซนผลงานร้อง Cover (Cover Works) -->
+    <div class="cs-heading" id="cover">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-microphone-alt"></i> Cover Works</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="portfolio-grid">
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7654290797562662164" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/17bBkxHIs9ZxjtGpgz71fKd0NhVP5tSHU=s1000" alt="Cover 1" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">รักเทอที่สุดในจักรยาน (You-niverse)</h3>
+                <p class="work-desc">Artist : STANG Tarisa Preechatangkit</p>
+                <p class="work-desc">Project : INDYCAMP 2023</p>
+                <div class="work-tags">
+                   <span class="tag">Vocal Cover</span>
+                  <span class="tag">Mix Audio</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933" class="work-card" target="_blank">
+            <div class="work-thumbnail-container">
+                <img src="https://lh3.googleusercontent.com/d/1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p=s1000" alt="Cover 2" class="work-thumbnail">
+                <i class="fas fa-play-circle play-overlay"></i>
+            </div>
+            <div class="work-info">
+                <h3 class="work-title">เอาปากกามาวง</h3>
+                <p class="work-desc">Artist : Bell Warisara</p>
+                <p class="work-desc">Home Run Music</p>
+                <div class="work-tags">
+                    <span class="tag">Vocal Cover</span>
+                    <span class="tag">Mix Audio</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- โซน Gallery (แกลเลอรี) -->
+    <div class="cs-heading" id="gallery">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-images"></i> Gallery</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="gallery-grid">
+        <img src="https://lh3.googleusercontent.com/d/1wxCQwGqjWc3fnCqFiRzEFoWa2KJcyZty=s1000" alt="Gallery 1" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1hxyoYziFaC4MtutaNrwAqKrHQxMj-NpX=s1000" alt="Gallery 2" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/12tap-Tst_Re7OhW4X7vIL7iTS6GGon9k=s1000" alt="Gallery 3" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1M0TCt2ytYHvA_faw9AJ9M9JxwsMA4lq3=s1000" alt="Gallery 4" class="gallery-img">
+        <img src="https://lh3.googleusercontent.com/d/1ZIk4B7shly5Ga7-a-nZta2yBgq01J7Ry=s1000" alt="Gallery 5" class="gallery-img">
+    </div>
+
+    <!-- ช่องทางการติดต่อ -->
+    <div class="cs-heading" id="contact">
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+        <span><i class="fas fa-paper-plane"></i> Contact Me</span>
+        <svg width="24" height="24" viewBox="0 0 60 60" class="cs-icon pink"><use href="#cs-heart" transform="translate(5, 10)"/></svg>
+    </div>
+    <div class="contact-container">
+        <a href="https://line.me/ti/p/2MV16HkEfq" class="social-btn" target="_blank">
+            <i class="fab fa-line"></i> LINE
+        </a>
+        <a href="https://www.instagram.com/mmchatpong/" class="social-btn" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="mailto:mmchatchapong@gmail.com" class="social-btn">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+        <a href="tel:0620702932" class="social-btn">
+            <i class="fas fa-phone-alt"></i> Phone
+        </a>        
+        <a href="https://github.com/emmyblm48-create" class="social-btn">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // ==========================================
+    // 1. ระบบซ่อนหน้าโหลดเข้าเว็บ (Preloader)
+    // ==========================================
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 600); 
+        }, 500); 
+    });
+
+    // ==========================================
+    // 2. ระบบสไลด์รูปโปรเจกต์
+    // ==========================================
+    const containers = document.querySelectorAll('.work-thumbnail-container');
+    containers.forEach(container => {
+        const wrapper = container.querySelector('.slider-wrapper');
+        if (!wrapper) return; 
+        
+        const slides = container.querySelectorAll('.work-thumbnail');
+        const dots = container.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+
+        if (totalSlides > 1) {
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            setInterval(nextSlide, 3000); 
+        }
+    });
+});
+</script>
+</body>
+</html>

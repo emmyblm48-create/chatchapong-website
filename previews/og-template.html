@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<!-- แม่แบบรูปพรีวิวตอนแชร์ลิงก์ (1200x630) — make-previews.ps1 จะแคปหน้านี้เป็น og-image.png -->
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        font-family: 'Quicksand', 'Kanit', sans-serif; color: #3F3A3C;
+        background:
+            url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFB3D0' stroke-width='1.5' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M26,20 l4,4 m0,-4 l-4,4 M38,20 l4,4 m0,-4 l-4,4 M20,26 l4,4 m0,-4 l-4,4 M26,26 l4,4 m0,-4 l-4,4 M32,26 l4,4 m0,-4 l-4,4 M38,26 l4,4 m0,-4 l-4,4 M44,26 l4,4 m0,-4 l-4,4 M26,32 l4,4 m0,-4 l-4,4 M32,32 l4,4 m0,-4 l-4,4 M38,32 l4,4 m0,-4 l-4,4 M32,38 l4,4 m0,-4 l-4,4' /%3E%3C/g%3E%3C/svg%3E"),
+            linear-gradient(135deg, #FFE1EC 0%, #FFFDF9 50%, #DDF8E1 100%);
+        display: flex; align-items: center; padding: 0 80px; gap: 60px;
+    }
+    .frame {
+        position: absolute; inset: 22px; border: 3px dashed #FFB3D0; border-radius: 36px; pointer-events: none;
+    }
+    .text { flex: 1; }
+    .pill { display: inline-block; font-weight: 700; font-size: 22px; color: #C94A7E; background: #fff; border: 2px dashed #FFB3D0; padding: 8px 22px; border-radius: 999px; margin-bottom: 26px; }
+    h1 { font-size: 92px; line-height: 1; color: #C94A7E; letter-spacing: -1px; }
+    .th { font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 30px; color: #6F6870; margin: 10px 0 28px; }
+    .roles { display: flex; gap: 12px; flex-wrap: wrap; }
+    .roles span { font-size: 22px; font-weight: 700; background: #fff; border: 1.5px solid #F6DCE7; padding: 10px 20px; border-radius: 999px; }
+    .photo {
+        width: 360px; height: 360px; border-radius: 42% 58% 55% 45% / 45% 45% 55% 55%; padding: 8px;
+        background: linear-gradient(135deg, #FFB3D0, #A0E8AF); box-shadow: 0 30px 60px rgba(201,74,126,.25);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; border: 7px solid #fff; }
+    .heart { position: absolute; color: #FFB3D0; }
+</style>
+</head>
+<body>
+    <div class="frame"></div>
+    <svg width="0" height="0" style="position:absolute"><defs>
+        <path id="x" d="M-3,-3 L3,3 M-3,3 L3,-3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        <g id="h"><use href="#x" x="12" y="0"/><use href="#x" x="36" y="0"/><use href="#x" x="0" y="12"/><use href="#x" x="12" y="12"/><use href="#x" x="24" y="12"/><use href="#x" x="36" y="12"/><use href="#x" x="48" y="12"/><use href="#x" x="0" y="24"/><use href="#x" x="12" y="24"/><use href="#x" x="24" y="24"/><use href="#x" x="36" y="24"/><use href="#x" x="48" y="24"/><use href="#x" x="12" y="36"/><use href="#x" x="24" y="36"/><use href="#x" x="36" y="36"/><use href="#x" x="24" y="48"/></g>
+    </defs></svg>
+    <svg class="heart" style="top:60px;right:90px" width="70" height="70" viewBox="-6 -6 66 66"><use href="#h"/></svg>
+    <svg class="heart" style="bottom:56px;left:520px;color:#A0E8AF" width="50" height="50" viewBox="-6 -6 66 66"><use href="#h"/></svg>
+
+    <div class="text">
+        <div class="pill">✿ PORTFOLIO</div>
+        <h1>Emmy</h1>
+        <div class="th">ชัชพงศ์ สิงคิพร · Maejo University</div>
+        <div class="roles"><span>UX/UI Designer</span><span>Frontend Dev</span><span>Web & App</span></div>
+    </div>
+    <div class="photo"><img src="https://lh3.googleusercontent.com/d/1g7ng_xBDlocsv65HiaPVcJ41CesWqJFG=s800" alt=""></div>
+</body>
+</html>

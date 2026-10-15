@@ -6,6 +6,8 @@
 $sites = [ordered]@{
     'blm48-membership' = 'https://blm48-membership.vercel.app/|1440,900'
     'blm48'            = 'https://blm48.vercel.app/|1440,2400'
+    'emmyblm48'        = 'https://emmyblm48.vercel.app/|1440,2400'
+    'dormitory-mju88'  = 'https://dormitory-mju88.vercel.app/|1440,900'
     # เพิ่มเว็บใหม่ตรงนี้: 'ชื่อไฟล์' = 'https://...|1440,2400'  (ความกว้าง,ความสูง)
 }
 

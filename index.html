@@ -31,6 +31,7 @@
         :root {
             --pink: #FFB3D0;
             --pink-deep: #C94A7E;
+            --pink-ink: #A8385F;
             --pink-soft: #FFE6F0;
             --mint: #D9F9DC;
             --mint-deep: #7FD39A;
@@ -91,7 +92,7 @@
             text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted);
             padding: 8px 14px; border-radius: 999px; transition: background .2s, color .2s;
         }
-        .nav-links a:hover, .nav-links a.active { background: var(--pink-soft); color: var(--pink-deep); }
+        .nav-links a:hover, .nav-links a.active { background: var(--pink-soft); color: var(--pink-ink); }
         .nav-cta {
             text-decoration: none; font-size: 14px; font-weight: 700; color: #fff;
             background: var(--pink-deep); padding: 9px 18px; border-radius: 999px;
@@ -112,7 +113,7 @@
             padding: 6px 8px; border-radius: 12px; transition: color .2s, background .2s;
         }
         .bottom-nav a i { font-size: 18px; }
-        .bottom-nav a.active { color: var(--pink-deep); background: var(--pink-soft); }
+        .bottom-nav a.active { color: var(--pink-ink); background: var(--pink-soft); }
 
         /* ---------- Hero ---------- */
         .hero { padding: 56px 0 24px; }
@@ -181,7 +182,7 @@
             font-family: inherit; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 999px;
             background: #fff; color: var(--muted); border: 1px solid var(--line); cursor: pointer; transition: all .2s;
         }
-        .chip.active, .chip:hover { background: var(--pink-soft); color: var(--pink-deep); border-color: var(--pink); }
+        .chip.active, .chip:hover { background: var(--pink-soft); color: var(--pink-ink); border-color: var(--pink); }
 
         /* ---------- About ---------- */
         .about-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 18px; }
@@ -206,7 +207,7 @@
             font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px;
             background: var(--bg); border: 1px solid var(--pink); transition: all .2s;
         }
-        .skill-tag:hover { background: var(--pink); color: #fff; }
+        .skill-tag:hover { background: var(--pink-deep); border-color: var(--pink-deep); color: #fff; }
 
         /* ---------- Website showcase (browser mockup) ---------- */
         .sites { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
@@ -215,7 +216,7 @@
             box-shadow: var(--shadow); text-decoration: none; display: flex; flex-direction: column;
             transition: transform .3s, box-shadow .3s;
         }
-        .site-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(240,127,170,.22); }
+        .site-card:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-6px); box-shadow: 0 18px 40px rgba(240,127,170,.22); }
         .browser { margin: 16px 16px 0; border-radius: 14px 14px 0 0; overflow: hidden; border: 1px solid var(--line); border-bottom: none; background: #fff; }
         .browser-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #FFF4F8; border-bottom: 1px solid var(--line); }
         .browser-bar i.c { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
@@ -245,7 +246,7 @@
             box-shadow: var(--shadow); text-decoration: none; display: flex; flex-direction: column;
             transition: transform .3s, box-shadow .3s;
         }
-        .work:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(240,127,170,.2); }
+        .work:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-5px); box-shadow: 0 14px 30px rgba(240,127,170,.2); }
         .thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--pink-soft); }
         .thumb .track { display: flex; height: 100%; transition: transform .5s cubic-bezier(.25,1,.5,1); }
         .thumb img { width: 100%; height: 100%; flex-shrink: 0; object-fit: cover; transition: transform .4s; }
@@ -306,9 +307,85 @@
         footer { text-align: center; padding: 40px 20px 30px; color: var(--muted); font-size: 13px; }
         footer svg { color: var(--pink); }
 
-        /* reveal on scroll */
-        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-        .reveal.in { opacity: 1; transform: none; }
+        /* =========================================
+           Animations
+           ========================================= */
+        /* reveal on scroll — ใช้ translate แยกจาก transform เพื่อไม่ชนกับ hover/tilt */
+        .reveal {
+            opacity: 0; translate: 0 28px; scale: .98;
+            transition: opacity .7s ease var(--d, 0s), translate .8s cubic-bezier(.2,.8,.2,1) var(--d, 0s), scale .8s cubic-bezier(.2,.8,.2,1) var(--d, 0s),
+                        transform .35s ease, box-shadow .35s ease;
+        }
+        .reveal.in { opacity: 1; translate: none; scale: none; }
+
+        /* แถบความคืบหน้าการเลื่อน */
+        .progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 1100; transform-origin: 0 50%; transform: scaleX(0);
+            background: linear-gradient(90deg, var(--pink), var(--pink-deep), var(--mint-deep)); }
+
+        /* Hero เข้าฉากแบบไล่ทีละชิ้น */
+        .intro-anim > * { opacity: 0; translate: 0 24px; }
+        body.ready .intro-anim > * { animation: rise .8s cubic-bezier(.2,.8,.2,1) forwards; }
+        body.ready .intro-anim > *:nth-child(2) { animation-delay: .1s; }
+        body.ready .intro-anim > *:nth-child(3) { animation-delay: .2s; }
+        body.ready .intro-anim > *:nth-child(4) { animation-delay: .3s; }
+        body.ready .intro-anim > *:nth-child(5) { animation-delay: .4s; }
+        body.ready .intro-anim > *:nth-child(6) { animation-delay: .5s; }
+        .hero-visual { opacity: 0; scale: .85; }
+        body.ready .hero-visual { animation: pop 1s cubic-bezier(.3,1.4,.5,1) .25s forwards; }
+        @keyframes rise { to { opacity: 1; translate: none; } }
+        @keyframes pop { to { opacity: 1; scale: 1; } }
+
+        /* ชื่อมีเส้นด้ายเย็บใต้ชื่อ ค่อย ๆ วาดออกมา */
+        .hero h1 .accent { position: relative; display: inline-block; }
+        .hero h1 .accent::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: .02em; height: 4px; border-radius: 2px;
+            background: repeating-linear-gradient(90deg, var(--pink) 0 10px, transparent 10px 16px);
+            transform: scaleX(0); transform-origin: 0 50%;
+        }
+        body.ready .hero h1 .accent::after { animation: sew 1.2s ease-out .9s forwards; }
+        @keyframes sew { to { transform: scaleX(1); } }
+        .flower { display: inline-block; color: var(--pink); animation: spin 8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* คำที่พิมพ์เอง */
+        .typed { color: var(--pink-deep); border-right: 3px solid var(--pink); padding-right: 4px; animation: caret 1s steps(1) infinite; white-space: nowrap; }
+        @keyframes caret { 50% { border-color: transparent; } }
+
+        /* หัวใจครอสติสลอยขึ้นในพื้นหลัง hero */
+        .hero { position: relative; overflow: hidden; }
+        .hearts { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+        .hero .wrap { position: relative; z-index: 1; }
+        .hearts svg { position: absolute; bottom: -60px; opacity: 0; animation: drift linear infinite; }
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0); opacity: 0; }
+            10% { opacity: .55; }
+            50% { transform: translate(var(--sway, 20px), -45vh) rotate(15deg); }
+            90% { opacity: .45; }
+            100% { transform: translate(0, -95vh) rotate(-10deg); opacity: 0; }
+        }
+
+        /* แถบทักษะวิ่ง */
+        .marquee { overflow: hidden; padding: 14px 0; margin-top: 30px; border-block: 1.5px dashed var(--pink);
+            background: rgba(255,255,255,.6); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+        .marquee-track { display: flex; gap: 34px; width: max-content; animation: marquee 32s linear infinite; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        .marquee-track span { font-weight: 700; font-size: 17px; color: var(--muted); display: inline-flex; align-items: center; gap: 34px; white-space: nowrap; }
+        .marquee-track span::after { content: '✿'; color: var(--pink); }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* หัวใจหัวข้อ section เต้นตอนเลื่อนมาถึง */
+        .sec-head.in .sec-title svg { animation: stitch 1s cubic-bezier(.3,1.5,.5,1) .2s both; }
+        @keyframes stitch { 0% { transform: scale(0) rotate(-90deg); } 100% { transform: none; } }
+
+        /* ปุ่มมีแสงวิ่งผ่าน */
+        .btn-primary { position: relative; overflow: hidden; }
+        .btn-primary::after { content: ''; position: absolute; inset: 0; translate: -120% 0;
+            background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); animation: shine 3.5s ease-in-out infinite 1.5s; }
+        @keyframes shine { 0%, 60% { translate: -120% 0; } 100% { translate: 120% 0; } }
+
+        /* หัวใจเด้งตอนคลิก */
+        .burst { position: fixed; pointer-events: none; z-index: 3000; color: var(--pink-deep); font-size: 14px; animation: burst .8s ease-out forwards; }
+        @keyframes burst { to { transform: translate(var(--bx), var(--by)) scale(.4); opacity: 0; } }
 
         /* ---------- Responsive ---------- */
         @media (max-width: 960px) {
@@ -341,7 +418,9 @@
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
-            .reveal { opacity: 1; transform: none; }
+            .reveal, .intro-anim > *, .hero-visual { opacity: 1; translate: none; scale: none; }
+            .hero h1 .accent::after { transform: none; }
+            .typed { border-right: none; }
         }
     </style>
 </head>
@@ -372,6 +451,8 @@
         <div class="preloader-text">LOADING…</div>
     </div>
 
+    <div class="progress" id="progress"></div>
+
     <!-- Top Nav -->
     <nav class="navbar">
         <div class="wrap">
@@ -392,10 +473,11 @@
 
     <!-- Hero -->
     <header class="hero" id="home">
+        <div class="hearts" id="hearts" aria-hidden="true"></div>
         <div class="wrap">
-            <div>
+            <div class="intro-anim">
                 <span class="hello"><span class="dot-live"></span> Open to internship & freelance</span>
-                <h1>Hi, I'm <span class="accent">Emmy</span> ✿<br>I design & build cute, useful web.</h1>
+                <h1>Hi, I'm <span class="accent">Emmy</span> <span class="flower" aria-hidden="true">✿</span><br>I design & build <span class="typed" id="typed" aria-label="cute, useful web.">cute</span><br>web experiences.</h1>
                 <div class="thai-name">ชัชพงศ์ สิงคิพร (เอ็มมี่)</div>
                 <div class="roles">
                     <span class="role"><i class="fas fa-pen-nib"></i>UX/UI Designer</span>
@@ -419,6 +501,7 @@
         <div class="wrap">
             <div class="stats" id="stats"></div>
         </div>
+        <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
     </header>
 
     <!-- About -->
@@ -603,6 +686,22 @@ const websites = [
         preview: 'previews/blm48.png',
         fallback: drive('1NQTKcl_qiE_5Y9tX4xaPKnTcaJ9YwrqY'),
         tags: ['Website', 'HTML/CSS', 'Vercel']
+    },
+    {
+        title: 'Emmy BLM48 Official Site',
+        desc: 'เว็บไซต์ส่วนตัวของ Emmy (BLM48) — 4-cut photo, ผลงาน, ข้อความถึงแฟนคลับ และระบบแจ้งเตือนวันครบรอบ',
+        url: 'https://emmyblm48.vercel.app/',
+        preview: 'previews/emmyblm48.png',
+        fallback: '',
+        tags: ['Website', 'HTML/CSS/JS', 'Vercel']
+    },
+    {
+        title: 'Dormitory Web App',
+        desc: 'ระบบหอพักบนเว็บ ผู้เช่าเข้าสู่ระบบเพื่อแจ้งซ่อมและติดตามสถานะ ผู้ดูแลหอพักเป็นผู้สร้างบัญชีให้',
+        url: 'https://dormitory-mju88.vercel.app/',
+        preview: 'previews/dormitory-mju88.png', scroll: false,
+        fallback: drive('1jsfuFC6KbbASyuUwocNxTxkIOfUcK-Yl'),
+        tags: ['Web App', 'Supabase', 'Vercel']
     }
     // เพิ่มเว็บใหม่: คัดลอกบล็อก { ... } ด้านบน แล้วรัน make-previews.ps1 เพื่อสร้างรูปพรีวิว
 ];
@@ -645,7 +744,9 @@ document.getElementById('stats').innerHTML = [
     [graphics.length, 'Thumbnail Designs'],
     [covers.length, 'Vocal Covers'],
     ['4th', 'Year @ Maejo']
-].map(([n, l]) => `<div class="stat reveal"><b>${n}${typeof n === 'number' ? '+' : ''}</b><span>${l}</span></div>`).join('');
+].map(([n, l]) => typeof n === "number"
+    ? `<div class="stat reveal"><b><span data-count="${n}">0</span>+</b><span>${l}</span></div>`
+    : `<div class="stat reveal"><b>${n}</b><span>${l}</span></div>`).join("");
 
 document.getElementById('sites').innerHTML = websites.map(w => `
     <a class="site-card reveal" href="${esc(w.url)}" target="_blank" rel="noopener">
@@ -694,7 +795,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // รูปพรีวิวเว็บไซต์: ถ้ายังไม่ได้สร้างไฟล์ ให้ใช้รูปสำรอง
 document.querySelectorAll('img[data-fallback]').forEach(img => {
     img.addEventListener('error', () => {
-        if (img.src !== img.dataset.fallback) { img.src = img.dataset.fallback; img.classList.remove('tall'); }
+        if (img.dataset.fallback && img.src !== img.dataset.fallback) { img.src = img.dataset.fallback; img.classList.remove('tall'); }
     });
 });
 
@@ -736,11 +837,108 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') showLb(lbIndex + 1);
 });
 
+/* =========================================================
+   Animations
+   ========================================================= */
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+// การ์ดในกริดเดียวกันโผล่ไล่กันทีละใบ
+document.querySelectorAll('.sites, .grid, .stats, .about-grid, .skills').forEach(group => {
+    [...group.children].forEach((el, i) => el.style.setProperty('--d', `${Math.min(i, 5) * 0.09}s`));
+});
+document.querySelectorAll('.about-grid, .skills').forEach(g => {
+    g.classList.remove('reveal');
+    [...g.children].forEach(c => c.classList.add('reveal'));
+});
+
+// ตัวเลขนับขึ้น
+function countUp(el) {
+    const target = +el.dataset.count, start = performance.now(), dur = 1200;
+    const tick = now => {
+        const t = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(tick);
+    };
+    reduceMotion ? (el.textContent = target) : requestAnimationFrame(tick);
+}
+
 // Reveal on scroll
 const io = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    if (!en.isIntersecting) return;
+    en.target.classList.add('in');
+    en.target.querySelectorAll('[data-count]').forEach(countUp);
+    io.unobserve(en.target);
 }), { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// คำที่พิมพ์เองในหัวข้อ hero
+const words = ['cute', 'useful', 'pink', 'friendly', 'fast'];
+const typed = document.getElementById('typed');
+if (!reduceMotion) {
+    let w = 0, c = words[0].length, deleting = true;
+    const type = () => {
+        const word = words[w];
+        c += deleting ? -1 : 1;
+        typed.textContent = word.slice(0, c) || '​';
+        let wait = deleting ? 55 : 110;
+        if (!deleting && c === word.length) { deleting = true; wait = 1800; }
+        else if (deleting && c === 0) { deleting = false; w = (w + 1) % words.length; c = 0; wait = 300; }
+        setTimeout(type, wait);
+    };
+    setTimeout(type, 2600);
+}
+
+// หัวใจครอสติสลอยในพื้นหลัง
+if (!reduceMotion) {
+    const colors = ['#FFB3D0', '#A0E8AF', '#A8D0E6', '#FFB3D0'];
+    document.getElementById('hearts').innerHTML = Array.from({ length: 12 }, (_, i) => {
+        const size = 14 + Math.random() * 18;
+        return `<svg width="${size}" height="${size}" viewBox="-5 -5 60 60" style="left:${Math.random() * 100}%;color:${colors[i % 4]};` +
+            `animation-duration:${14 + Math.random() * 12}s;animation-delay:-${Math.random() * 20}s;--sway:${(Math.random() - .5) * 80}px"><use href="#cs-heart"/></svg>`;
+    }).join('');
+}
+
+// แถบทักษะวิ่ง (ทำซ้ำ 2 รอบเพื่อให้วนต่อเนื่อง)
+const skillWords = ['UX/UI Design', 'Figma', 'HTML5', 'CSS3', 'JavaScript', 'FlutterFlow', 'Supabase', 'Vercel', 'Canva', 'Mix Audio', 'Video Editing'];
+document.getElementById('marquee').innerHTML = [...skillWords, ...skillWords].map(s => `<span>${s}</span>`).join('');
+
+// การ์ดเอียงตามเมาส์
+if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.site-card, .work').forEach(card => {
+        card.addEventListener('pointermove', e => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - .5) * 8}deg`);
+            card.style.setProperty('--rx', `${((e.clientY - r.top) / r.height - .5) * -8}deg`);
+        });
+        card.addEventListener('pointerleave', () => { card.style.removeProperty('--rx'); card.style.removeProperty('--ry'); });
+    });
+}
+
+// แถบความคืบหน้าการเลื่อน
+const bar = document.getElementById('progress');
+const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+};
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// หัวใจเด้งเมื่อคลิกปุ่ม
+if (!reduceMotion) {
+    document.addEventListener('click', e => {
+        const b = e.target.closest('.btn, .social, .nav-cta, .brand');
+        if (!b) return;
+        for (let i = 0; i < 8; i++) {
+            const h = document.createElement('i');
+            h.className = 'fas fa-heart burst';
+            const a = (Math.PI * 2 * i) / 8, d = 40 + Math.random() * 30;
+            h.style.cssText = `left:${e.clientX - 7}px;top:${e.clientY - 7}px;--bx:${Math.cos(a) * d}px;--by:${Math.sin(a) * d}px`;
+            document.body.appendChild(h);
+            h.addEventListener('animationend', () => h.remove());
+        }
+    });
+}
 
 // ไฮไลต์เมนูตาม section ที่กำลังดู
 const navLinks = document.querySelectorAll('.nav-links a, .bottom-nav a');
@@ -751,8 +949,12 @@ const spy = new IntersectionObserver(entries => entries.forEach(en => {
 document.querySelectorAll('header[id], section[id]').forEach(s => spy.observe(s));
 
 // Preloader
-window.addEventListener('load', () => setTimeout(() => document.getElementById('preloader').classList.add('hide'), 300));
-setTimeout(() => document.getElementById('preloader').classList.add('hide'), 4000);
+const hidePreloader = () => {
+    document.getElementById('preloader').classList.add('hide');
+    document.body.classList.add('ready');
+};
+window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+setTimeout(hidePreloader, 4000);
 </script>
 </body>
 </html>

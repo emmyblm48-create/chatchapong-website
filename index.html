@@ -678,7 +678,7 @@
             <div class="music">
                 <div class="deck reveal" id="deck">
                     <div class="turntable">
-                        <div class="vinyl"><img id="now-art" src="" alt=""></div>
+                        <div class="vinyl"><img id="now-art" src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/21/8c/1c/218c1c05-c60a-457d-f3ae-4818ff2a8125/0840102466300_Cover.jpg/300x300bb.jpg" alt=""></div>
                         <div class="tonearm" aria-hidden="true"></div>
                     </div>
                     <div class="now">NOW SPINNING</div>
@@ -746,7 +746,6 @@
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="ดูรูปขนาดใหญ่">
         <button class="lb-btn lb-close" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
         <button class="lb-btn lb-prev" aria-label="รูปก่อนหน้า"><i class="fas fa-chevron-left"></i></button>
-        <img alt="">
         <button class="lb-btn lb-next" aria-label="รูปถัดไป"><i class="fas fa-chevron-right"></i></button>
     </div>
 
@@ -955,7 +954,9 @@ document.querySelectorAll('.thumb').forEach(t => {
 });
 
 // Lightbox
-const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+const lb = document.getElementById('lightbox'), lbImg = new Image();
+lbImg.alt = '';
+lb.querySelector('.lb-next').before(lbImg);
 let lbIndex = 0;
 const showLb = i => { lbIndex = (i + gallery.length) % gallery.length; lbImg.src = drive(gallery[lbIndex], 1600); lb.classList.add('open'); };
 document.getElementById('gallery-grid').addEventListener('click', e => {

@@ -310,6 +310,61 @@
         /* =========================================
            Animations
            ========================================= */
+        /* ---------- Fav Songs (Apple Music) ---------- */
+        .music { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 22px; align-items: start; }
+        .deck {
+            background: linear-gradient(160deg, #FFF 0%, #FFF4F8 100%); border: 2px dashed var(--pink-soft);
+            border-radius: var(--radius); padding: 26px 22px 22px; box-shadow: var(--shadow); text-align: center; position: relative;
+        }
+        .turntable { position: relative; width: min(260px, 70vw); aspect-ratio: 1; margin: 0 auto 18px; }
+        .vinyl {
+            position: absolute; inset: 0; border-radius: 50%;
+            background:
+                radial-gradient(circle, transparent 0 31%, rgba(255,255,255,.07) 31.5% 32%, transparent 32.5% 40%, rgba(255,255,255,.06) 40.5% 41%, transparent 41.5% 52%, rgba(255,255,255,.06) 52.5% 53%, transparent 53.5% 64%, rgba(255,255,255,.05) 64.5% 65%, transparent 65.5%),
+                conic-gradient(from 30deg, #2a2226, #3d3136, #2a2226, #3a2e33, #2a2226);
+            box-shadow: 0 18px 40px rgba(60, 30, 45, .3), inset 0 0 0 6px #1f191c;
+            animation: vinyl 6s linear infinite; animation-play-state: paused;
+        }
+        .deck.playing .vinyl { animation-play-state: running; }
+        .vinyl img { position: absolute; inset: 31%; width: 38%; height: 38%; border-radius: 50%; object-fit: cover; border: 3px solid #fff; }
+        .vinyl::after { content: ''; position: absolute; inset: 48.5%; border-radius: 50%; background: var(--bg); }
+        @keyframes vinyl { to { transform: rotate(360deg); } }
+        .tonearm {
+            position: absolute; top: -4%; right: -6%; width: 34%; height: 60%; transform-origin: 80% 10%;
+            transform: rotate(-28deg); transition: transform .8s cubic-bezier(.3,1.3,.5,1); pointer-events: none;
+        }
+        .deck.playing .tonearm { transform: rotate(0deg); }
+        .tonearm::before { content: ''; position: absolute; top: 4%; right: 14%; width: 16px; height: 16px; border-radius: 50%; background: var(--pink-deep); box-shadow: 0 0 0 5px #fff, 0 4px 10px rgba(0,0,0,.15); }
+        .tonearm::after { content: ''; position: absolute; top: 10%; right: 19%; width: 5px; height: 88%; border-radius: 3px; background: linear-gradient(#d9cfd4, #b9adb3); transform: rotate(18deg); transform-origin: top; }
+        .now { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--pink-ink); }
+        .now-title { font-family: 'Kanit', sans-serif; font-weight: 500; font-size: 20px; margin-top: 4px; }
+        .now-artist { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+        .player-frame { width: 100%; height: 175px; border: 0; border-radius: 12px; overflow: hidden; background: transparent; }
+        .apple-note { font-size: 12.5px; color: var(--muted); margin-top: 10px; display: flex; gap: 6px; align-items: flex-start; justify-content: center; text-align: left; }
+        .apple-note i { color: var(--pink-deep); margin-top: 3px; }
+
+        .tracklist { list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: track; }
+        .song {
+            all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: 26px 56px 1fr auto; gap: 14px; align-items: center;
+            background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 14px; transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .song:hover { transform: translateX(4px); border-color: var(--pink); }
+        .song:focus-visible { outline: 3px solid var(--pink-deep); outline-offset: 2px; }
+        .song[aria-current="true"] { border-color: var(--pink-deep); box-shadow: 0 8px 22px rgba(201,74,126,.15); background: #fff; }
+        .song .num { font-weight: 700; color: var(--muted); text-align: center; }
+        .song[aria-current="true"] .num { color: var(--pink-deep); }
+        .song img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; }
+        .song b { display: block; font-family: 'Kanit', sans-serif; font-weight: 500; font-size: 15px; line-height: 1.35; }
+        .song small { color: var(--muted); font-size: 13px; }
+        .song .why { display: block; font-family: 'Kanit', sans-serif; font-weight: 300; font-size: 12.5px; color: var(--pink-ink); margin-top: 2px; }
+        .song .state { color: var(--pink-deep); font-size: 18px; width: 20px; text-align: center; }
+        .eq { display: inline-flex; gap: 2px; align-items: flex-end; height: 16px; }
+        .eq i { width: 3px; background: var(--pink-deep); border-radius: 2px; animation: eq .9s ease-in-out infinite; }
+        .eq i:nth-child(2) { animation-delay: -.3s; } .eq i:nth-child(3) { animation-delay: -.6s; }
+        @keyframes eq { 0%, 100% { height: 4px; } 50% { height: 16px; } }
+        .open-am { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13.5px; font-weight: 700; color: var(--pink-ink); text-decoration: none; }
+        .open-am:hover { text-decoration: underline; }
+
         /* reveal on scroll — ใช้ translate แยกจาก transform เพื่อไม่ชนกับ hover/tilt */
         .reveal {
             opacity: 0; translate: 0 28px; scale: .98;
@@ -397,6 +452,7 @@
             .about-grid { grid-template-columns: 1fr 1fr; }
             .about-grid .card:first-child { grid-column: 1 / -1; }
             .skills { grid-template-columns: 1fr; }
+            .music { grid-template-columns: 1fr; }
         }
         @media (max-width: 720px) {
             body { padding-bottom: 92px; }
@@ -465,6 +521,7 @@
                 <li><a href="#apps">Apps & UI</a></li>
                 <li><a href="#graphic">Graphic</a></li>
                 <li><a href="#cover">Cover</a></li>
+                <li><a href="#songs">Songs</a></li>
                 <li><a href="#gallery">Gallery</a></li>
             </ul>
             <a href="#contact" class="nav-cta">Contact me</a>
@@ -609,6 +666,37 @@
         </div>
     </section>
 
+    <!-- Fav Songs -->
+    <section id="songs">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="sec-title">
+                    <svg width="30" height="30" viewBox="0 0 50 50"><use href="#cs-heart" transform="translate(3,5)"/></svg>
+                    <h2>Fav Songs<small>เพลงโปรดของเอ็มมี่ — กดเลือกเพลง แล้วกดเล่นในตัวเล่น Apple Music</small></h2>
+                </div>
+            </div>
+            <div class="music">
+                <div class="deck reveal" id="deck">
+                    <div class="turntable">
+                        <div class="vinyl"><img id="now-art" src="" alt=""></div>
+                        <div class="tonearm" aria-hidden="true"></div>
+                    </div>
+                    <div class="now">NOW SPINNING</div>
+                    <div class="now-title" id="now-title"></div>
+                    <div class="now-artist" id="now-artist"></div>
+                    <iframe class="player-frame" id="am-player" title="Apple Music player" loading="lazy"
+                        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe>
+                    <p class="apple-note"><i class="fab fa-apple"></i><span>สมาชิก Apple Music ที่ล็อกอินในเบราว์เซอร์จะฟังได้เต็มเพลง ถ้ายังไม่ได้ล็อกอินจะได้ฟังตัวอย่าง 30 วินาที</span></p>
+                </div>
+                <div>
+                    <ol class="tracklist" id="tracklist"></ol>
+                    <a class="open-am reveal" id="open-am" href="#" target="_blank" rel="noopener"><i class="fab fa-apple"></i> เปิดเพลงนี้ในแอป Apple Music <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery -->
     <section id="gallery">
         <div class="wrap">
@@ -731,6 +819,15 @@ const covers = [
     { title: 'เอาปากกามาวง', desc: 'Artist: Bell Warisara · Home Run Music', url: 'https://www.tiktok.com/@emmy.blm48official/video/7633872308695878933', images: ['1pzjVVZCm_uAR50SpLzMcOEogjOWKVN3p'] }
 ];
 
+// เพลงโปรด (Apple Music) — เพิ่มเพลง: เปิดเพลงใน Apple Music > Share > Copy Link
+// ลิงก์จะเป็นแบบ music.apple.com/th/album/ชื่อ/<album>?i=<track> ให้ใส่เลข album และ track
+const favSongs = [
+    { title: 'เอาปากกามาวง', artist: 'BELL WARISARA', album: '1871381515', track: '1871381516',
+      art: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/21/8c/1c/218c1c05-c60a-457d-f3ae-4818ff2a8125/0840102466300_Cover.jpg', note: 'เพลงที่เคยร้อง Cover' },
+    { title: 'รักเทอที่สุดในจักรยาน (You-niverse)', artist: 'Stang Tarisa', album: '1729751602', track: '1729751607',
+      art: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/6b/9d/c5/6b9dc534-a86b-0477-2f83-05257fbfe500/0840291268600.jpg', note: 'เพลงที่เคยร้อง Cover · INDYCAMP 2023' }
+];
+
 const gallery = ['1wxCQwGqjWc3fnCqFiRzEFoWa2KJcyZty', '1hxyoYziFaC4MtutaNrwAqKrHQxMj-NpX', '12tap-Tst_Re7OhW4X7vIL7iTS6GGon9k', '1M0TCt2ytYHvA_faw9AJ9M9JxwsMA4lq3', '1ZIk4B7shly5Ga7-a-nZta2yBgq01J7Ry'];
 
 /* =========================================================
@@ -792,6 +889,44 @@ document.getElementById('gallery-grid').innerHTML = gallery.map((id, i) =>
     `<button data-i="${i}" aria-label="เปิดรูปที่ ${i + 1}"><img src="${drive(id, 600)}" alt="Gallery ${i + 1}" loading="lazy"></button>`).join('');
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Fav Songs — ใช้ตัวเล่นทางการของ Apple Music (embed.music.apple.com)
+const deck = document.getElementById('deck'), amPlayer = document.getElementById('am-player');
+const artSize = (url, px) => `${url}/${px}x${px}bb.jpg`;
+document.getElementById('tracklist').innerHTML = favSongs.map((s, i) => `
+    <li class="reveal"><button class="song" data-i="${i}" aria-current="false">
+        <span class="num">${String(i + 1).padStart(2, '0')}</span>
+        <img src="${esc(artSize(s.art, 120))}" alt="" loading="lazy">
+        <span><b>${esc(s.title)}</b><small>${esc(s.artist)}</small>${s.note ? `<span class="why">${esc(s.note)}</span>` : ''}</span>
+        <span class="state" aria-hidden="true"><i class="fas fa-play"></i></span>
+    </button></li>`).join('');
+
+function selectSong(i, userPicked) {
+    const s = favSongs[i];
+    amPlayer.src = `https://embed.music.apple.com/th/album/${s.album}?i=${s.track}&theme=light`;
+    document.getElementById('now-art').src = artSize(s.art, 300);
+    document.getElementById('now-title').textContent = s.title;
+    document.getElementById('now-artist').textContent = s.artist;
+    document.getElementById('open-am').href = `https://music.apple.com/th/album/${s.album}?i=${s.track}`;
+    document.querySelectorAll('.song').forEach((t, k) => {
+        t.setAttribute('aria-current', k === i);
+        t.querySelector('.state').innerHTML = k === i && userPicked ? '<span class="eq"><i></i><i></i><i></i></span>' : '<i class="fas fa-play"></i>';
+    });
+    deck.classList.toggle('playing', !!userPicked);
+}
+if (favSongs.length) selectSong(0, false);
+else document.getElementById('songs').remove();
+document.getElementById('tracklist').addEventListener('click', e => {
+    const t = e.target.closest('.song'); if (t) selectSong(+t.dataset.i, true);
+});
+// เมื่อกดเล่นในตัวเล่น (iframe ได้โฟกัส) ให้แผ่นเสียงเริ่มหมุน
+addEventListener('blur', () => setTimeout(() => {
+    if (document.activeElement === amPlayer) {
+        deck.classList.add('playing');
+        const cur = document.querySelector('.song[aria-current="true"] .state');
+        if (cur) cur.innerHTML = '<span class="eq"><i></i><i></i><i></i></span>';
+    }
+}));
+
 // รูปพรีวิวเว็บไซต์: ถ้ายังไม่ได้สร้างไฟล์ ให้ใช้รูปสำรอง
 document.querySelectorAll('img[data-fallback]').forEach(img => {
     img.addEventListener('error', () => {
@@ -844,7 +979,7 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // การ์ดในกริดเดียวกันโผล่ไล่กันทีละใบ
-document.querySelectorAll('.sites, .grid, .stats, .about-grid, .skills').forEach(group => {
+document.querySelectorAll('.sites, .grid, .stats, .about-grid, .skills, .tracklist').forEach(group => {
     [...group.children].forEach((el, i) => el.style.setProperty('--d', `${Math.min(i, 5) * 0.09}s`));
 });
 document.querySelectorAll('.about-grid, .skills').forEach(g => {
